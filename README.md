@@ -1,6 +1,19 @@
 # Combined American Signal Set 2
 
-An unofficial successor to the "Combined Americal Signal Set" by Pikka et al, updated to use NML and support JGRPP's multi-aspect signals.
+An unofficial successor to the "Combined Americal Signal Set" by Pikka et al, with the goal to be updated to use NML, and support JGRPP's multi-aspect signals.
+
+## Goals
+
+- [ ] Reimplement CASS in NML
+- [ ] Implement multi-aspect signals into CASS2
+
+## Test Cases
+
+- Keep vanilla features
+  - Block, Pre, Path signals
+- Realistic braking ON
+  - BLock, Path signals
+  - Multi-aspect
 
 ## Useful Links
 
