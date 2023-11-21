@@ -17,6 +17,7 @@ An unofficial successor to the "Combined Americal Signal Set" by Pikka et al, wi
   - [ ] Semaphore bar selection
   - [ ] Electric bar selection
   - [ ] Should be able to select 2 of the same type
+- [ ] Implement multi-aspect
 
 ### Notes
 
@@ -39,3 +40,4 @@ An unofficial successor to the "Combined Americal Signal Set" by Pikka et al, wi
 - [Signal aspects](https://signals.jovet.net/rules/)
 - [Docs on how multi-aspect works](https://jgrennison.github.io/OpenTTD-patches/newgrf-additions-nml.html#signal-graphics:~:text=set%20to%20zero.-,extra_aspects,-0%20-%206)
 - [JGR's sample grf](https://github.com/JGRennison/multi-aspect-signals-grf)
+- [grf-py](https://github.com/citymania-org/grf-py)
