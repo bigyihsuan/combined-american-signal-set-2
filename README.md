@@ -6,6 +6,7 @@ An unofficial successor to the "Combined Americal Signal Set" by Pikka et al, wi
 
 - [ ] Reimplement CASS in NML
 - [ ] Implement multi-aspect signals into CASS2
+- [ ] Backport to work with vanilla OpenTTD
 
 ### TODOs
 

@@ -34,6 +34,7 @@
    25 * 6	 07 83 01 \7< FF BE
    26 * 6	 07 83 01 \7< FF 00
    27 * 2	 10 BB
+// sprite 28, 5 bytes, action 0A replace sprites, replace 1 set, FB = 251 sprites, 04 is first sprite
    28 * 5	 0A 01 10 FB 04
    29 .\sprites/ussigzw00.png  8bpp  226   24    5   22   -3  -19 normal
    30 .\sprites/ussigzw00.png  8bpp  242   24    5   22   -3  -19 normal
@@ -51,6 +52,7 @@
    42 .\sprites/ussigzw00.png  8bpp  178   56    8   22   -4  -19 normal
    43 .\sprites/ussigzw00.png  8bpp  194   56    8   22   -4  -19 normal
    44 .\sprites/ussigzw00.png  8bpp  210   56    8   22   -4  -19 normal
+// sprite 45, 3 bytes, action 05 replace non-TTD sprite, presignal/semaphore/path signal graphics, F0 = 240 sprites follow
    45 * 3	 05 04 F0
    46 .\sprites/ussigzw00.png  8bpp  242   56    5   22   -3  -19 normal
    47 .\sprites/ussigzw00.png  8bpp    2   88    5   22   -3  -19 normal

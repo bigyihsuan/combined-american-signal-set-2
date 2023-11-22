@@ -1,22 +1,42 @@
 #!/bin/bash
 
-NMLC=nmlc
-NGRF_DIR=/mnt/c/Users/bigyihsuan/Documents/OpenTTD/newgrf/
+NGRF_DIR=/mnt/c/Users/bigyi/OneDrive/Documents/OpenTTD/newgrf/
+USAGE="usage: ./build.sh (default | install | bundle)"
+BAD_ARGS=85
 
 default() {
-	$(NMLC) cass2.nml --nfo=cass2.nfo --grf=cass2.grf
+	mkdir -p out
+	nmlc --nfo=out/cass2.nfo --grf=out/cass2.grf cass2.nml
+	# nmlc --grf=cass2.grf cass2.nml
 }
 
 install() {
-	cp cass2.grf $(NGRF_DIR)
+	default
+	if [[ -e "./out/cass2.grf" ]]; then
+		cp ./out/cass2.grf $NGRF_DIR
+	fi
 }
 
 bundle() {
 	default
-	mkdir -p cass2
-	cp cass2.grf cass2
-	cp README.md cass2/readme.txt
-	cp LICENSE cass2/license.txt
-	cp changelog.md cass2/changelog.txt
-	tar cvf cass2.tar cass2
+	cp README.md out/readme.txt
+	cp LICENSE out/license.txt
+	cp changelog.md out/changelog.txt
+	tar cvf cass2.tar out
 }
+
+if [[ ! -n "$1" ]]; then
+	echo $USAGE
+	exit $BAD_ARGS
+fi
+
+if [[ "$1" = "default" ]]; then
+	default
+elif [[ "$1" = "install" ]]; then
+	install
+elif [[ "$1" = "bundle" ]]; then
+	bundle
+else
+	echo $USAGE
+	exit $BAD_ARGS
+fi
