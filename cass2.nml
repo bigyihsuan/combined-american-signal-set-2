@@ -11,34 +11,36 @@ grf {
 // the top left corners of all sprites should be on (16x + 16n, y)
 // [x, y, sizeX, sizeY, offX, offY]
 // R G R G R G ...
-template semaphore_1_mixed(x, y) {
-    [x+  0, y,  8, 24,  -3, -21] // SW
-    [x+ 16, y,  4, 28,  -2, -25] // SW
-    [x+ 32, y,  8, 25,  -5, -22] // NE
-    [x+ 48, y,  4, 28,  -2, -25] // NE
-    [x+ 64, y,  8, 24,  -5, -21] // NW
-    [x+ 80, y,  4, 28,  -2, -25] // NW
-    [x+ 96, y,  8, 25,  -3, -22] // SE
-    [x+112, y,  4, 28,  -2, -25] // SE
-    [x+128, y,  3, 24,  -1, -21] // W
-    [x+144, y,  3, 28,  -1, -25] // W
-    [x+160, y,  3, 24,  -2, -21] // E
-    [x+176, y,  3, 28,  -2, -25] // E
-    [x+192, y, 10, 24,  -3, -21] // N
-    [x+208, y,  4, 28,  -1, -25] // N
-    [x+224, y, 10, 24,  -7, -21] // S
-    [x+240, y,  4, 28,  -3, -25] // S
+template signal(x, y) {
+    [x+  0, y, 16, 32, -8, -30] // SW
+    [x+ 17, y, 16, 32, -8, -30] // SW
+    [x+ 34, y, 16, 32, -8, -30] // NE
+    [x+ 51, y, 16, 32, -8, -30] // NE
+    [x+ 68, y, 16, 32, -8, -30] // NW
+    [x+ 85, y, 16, 32, -8, -30] // NW
+    [x+102, y, 16, 32, -8, -30] // SE
+    [x+119, y, 16, 32, -8, -30] // SE
+    [x+136, y, 16, 32, -8, -30] // W
+    [x+153, y, 16, 32, -8, -30] // W
+    [x+170, y, 16, 32, -8, -30] // E
+    [x+187, y, 16, 32, -8, -30] // E
+    [x+204, y, 16, 32, -8, -30] // N
+    [x+221, y, 16, 32, -8, -30] // N
+    [x+238, y, 16, 32, -8, -30] // S
+    [x+255, y, 16, 32, -8, -30] // S
 }
 
-// spriteset name, source image { sprites... }
-// spriteset(semaphore_1_red, "gfx/semaphore-1arm.png") {semaphore_1_red(0, 0)}
-// spriteset(semaphore_1_green, "gfx/semaphore-1arm.png") {semaphore_1_green(0, 0)}
+// red and green signals are spaced every y=33n, 0 <= n <= 7
 
-// block signals are part of base set, start at 1275
-replace(1275, "gfx/semaphore-1arm.png") {
-    semaphore_1_mixed(0,0)
-}
-// semaphore block signals = 48
-replacenew(SIGNALS, "gfx/semaphore-1arm.png", 48) {
-    semaphore_1_mixed(0,0)
+// electric block signals are part of base set, start at 1275
+// replace(1275, "gfx/block-path-rg.png") {
+//     signal(0,0)
+// }
+
+// semaphore block = 48
+// semaphore entry = 64
+// semaphore exit  = 80
+// semaphore combo = 96
+replacenew(SIGNALS, "gfx/block-path-rg.png", 48) {
+    signal(0,33*0) // replace just the semaphore block
 }

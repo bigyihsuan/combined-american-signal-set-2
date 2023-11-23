@@ -1,10 +1,14 @@
 # Combined American Signal Set 2
 
-An unofficial successor to the "Combined Americal Signal Set" by Pikka et al, with the goal to be updated to use NML, and support JGRPP's multi-aspect signals.
+A JGRPP-only, unofficial successor to the "Combined Americal Signal Set" by Pikka et al, with the goal to be updated to use NML, and support JGRPP's multi-aspect signals.
 
 ## Goals
 
-- [ ] Reimplement CASS in NML
+- [ ] Reimplement a subset CASS in NML
+  - [ ] Block
+  - [ ] Path
+  - [ ] One-way Path
+  - [ ] No-Entry
 - [ ] Implement multi-aspect signals into CASS2
 - [ ] Backport to work with vanilla OpenTTD
 
@@ -25,14 +29,6 @@ An unofficial successor to the "Combined Americal Signal Set" by Pikka et al, wi
 - semaphores have no graphics for yellow aspect block signals (red flag), but it exists for yellow distant signals (yellow flag)
 - we can copy-paste the yellow aspect for searchlight and color lights from the path signal variants
 - b&o needs yellow aspect and flashing yellow. i don't think there's flashing yellow aspect, but other railroads use it for "approach medium/advanced approach". the equivalent in b&o is probably this one. we have that light on path/presignals already
-
-## Test Cases
-
-- Keep vanilla features
-  - Block, Pre, Path signals
-- Realistic braking ON
-  - BLock, Path signals
-  - Multi-aspect
 
 ## Useful Links
 
