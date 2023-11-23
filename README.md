@@ -32,6 +32,7 @@ A JGRPP-only, unofficial successor to the "Combined Americal Signal Set" by Pikk
 
 ## Useful Links
 
+- [Signal Aspect List](https://docs.google.com/spreadsheets/d/1LJK-9byqPhvQGTWNF2Oebdc0c55675EyVu3RkYG0yH8/edit?usp=sharing)
 - [Original CASS](https://bananas.openttd.org/package/newgrf/44440502)
 - [Original OpenTTD Forum Thread](https://www.tt-forums.net/viewtopic.php?t=24420)
 - [Signal aspects](https://signals.jovet.net/rules/)
