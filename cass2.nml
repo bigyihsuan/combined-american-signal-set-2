@@ -1,46 +1,364 @@
 grf {
-    grfid:                  "BY\01\01";
-    name:                   string(STR_GRF_NAME);
-    desc:                   string(STR_GRF_DESCRIPTION);
-    url:                    string(STR_GRF_URL);
-    version:                0;
-    min_compatible_version: 0;
+		grfid:                  "BY\01\01";
+		name:                   string(STR_GRF_NAME);
+		desc:                   string(STR_GRF_DESCRIPTION);
+		url:                    string(STR_GRF_URL);
+		version:                0;
+		min_compatible_version: 0;
 }
 
-// x and y are the top left corner of the first signal (NW-SW)
-// the top left corners of all sprites should be on (16x + 16n, y)
-// [x, y, sizeX, sizeY, offX, offY]
-// R G R G R G ...
-template signal(x, y) {
-    [x+  0, y, 16, 32, -8, -30] // SW
-    [x+ 17, y, 16, 32, -8, -30] // SW
-    [x+ 34, y, 16, 32, -8, -30] // NE
-    [x+ 51, y, 16, 32, -8, -30] // NE
-    [x+ 68, y, 16, 32, -8, -30] // NW
-    [x+ 85, y, 16, 32, -8, -30] // NW
-    [x+102, y, 16, 32, -8, -30] // SE
-    [x+119, y, 16, 32, -8, -30] // SE
-    [x+136, y, 16, 32, -8, -30] // W
-    [x+153, y, 16, 32, -8, -30] // W
-    [x+170, y, 16, 32, -8, -30] // E
-    [x+187, y, 16, 32, -8, -30] // E
-    [x+204, y, 16, 32, -8, -30] // N
-    [x+221, y, 16, 32, -8, -30] // N
-    [x+238, y, 16, 32, -8, -30] // S
-    [x+255, y, 16, 32, -8, -30] // S
+if (!extended_feature_test("action3_signals_custom_signal_sprites")) {
+	error(FATAL, string(STR_UNSUPPORTED_VERSION));
 }
 
-// red and green signals are spaced every y=33n, 0 <= n <= 7
+// Commented by osswix and big mostly
+// the following is a template for adding sprites to the newgrf
+// -template [template name](x, y){
+// - [x, y, sizex, sizey, offsetx offsety]
+// -}
 
-// electric block signals are part of base set, start at 1275
-// replace(1275, "gfx/block-path-rg.png") {
-//     signal(0,0)
-// }
+template row(x, y) { [x+0, y, 8, 32, -8, -32] }
 
-// semaphore block = 48
-// semaphore entry = 64
-// semaphore exit  = 80
-// semaphore combo = 96
-replacenew(SIGNALS, "gfx/block-path-rg.png", 48) {
-    signal(0,33*0) // replace just the semaphore block
+// x = 17n, n >= 0
+// y = 33n, n >= 0
+template general_template(x, y) {
+		[x+  0, y,  8, 24,  -8, -32] // SW
+		[x+ 32, y,  8, 24,  -8, -32] // NE
+		[x+ 64, y,  8, 24,  -8, -32] // NW
+		[x+ 96, y,  8, 25,  -8, -32] // SE
+		[x+128, y,  3, 24,  -8, -32] // W
+		[x+160, y,  3, 24,  -8, -32] // E
+		[x+192, y, 10, 24,  -8, -32] // N
+		[x+224, y, 10, 24,  -8, -32] // S
+}
+
+// template for spriteset :
+// spriteset([name], "file location"){[template_specific](x,y)}
+// where file location is the location of the image containing the sprites
+// template_specific is the template relevant to the sprites
+// x and y are the starting coordinates of the first sprite in the set
+//
+// For this american set the following setup will be used
+//
+// For single aspect signals there will be three states:
+// CLR  clear
+// APR  approach
+// STP  stop
+// for two aspect signals there is a more extended variety of states,
+// these states differe between block and path signals to somewhat
+// emulate a realistic situation, the states are as follows
+// for 2 aspect block signals:
+// CLR  clear
+// AAL  advanced approach limited
+// APM  approach medium
+// AAP  advanced approach
+// APR  approach
+// STP  stop
+// for 2 aspect path signals:
+// clear
+// MCL  medium clear
+// APR  approach
+// STP  stop
+// for 3 aspect block signals:
+// CLR  clear
+// AAL  advanced approach limited
+// APM  approach medium
+// APS  approach slow
+// APR  approach
+// STP  stop
+// for 3 aspect path signals:
+// CLR  clear
+// LCL  limited clear
+// MCL  medium clear
+// SCL  slow clear
+// STP  stop
+//
+// the following abbriviations are used
+// SA, DA, TA for single, double, and triple aspect respectively
+// B for block and P for path.
+// S for semaphore and L for light with other variations to later be added.
+
+
+// single aspects
+spriteset(signal_SABP_S_CLR, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_SABP_S_APR, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_SABP_S_STP, "gfx/1-and-2-head.png"){general_template()}
+
+spriteset(signal_SABP_L_CLR, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_SABP_L_APR, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_SABP_L_STP, "gfx/1-and-2-head.png"){general_template()}
+
+// double aspect semaphores
+spriteset(signal_DAB_S_CLR, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_DAB_S_AAL, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_DAB_S_APM, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_DAB_S_AAP, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_DAB_S_APR, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_DAB_S_STP, "gfx/1-and-2-head.png"){general_template()}
+
+spriteset(signal_DAP_S_CLR, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_DAP_S_MCL, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_DAP_S_APR, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_DAP_S_STP, "gfx/1-and-2-head.png"){general_template()}
+
+// double aspect lights
+spriteset(signal_DAB_L_CLR, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_DAB_L_AAL, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_DAB_L_APM, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_DAB_L_AAP, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_DAB_L_APR, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_DAB_L_STP, "gfx/1-and-2-head.png"){general_template()}
+
+spriteset(signal_DAP_L_CLR, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_DAP_L_MCL, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_DAP_L_APR, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_DAP_L_STP, "gfx/1-and-2-head.png"){general_template()}
+
+// triple aspects semaphores
+spriteset(signal_TAB_S_CLR, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_TAB_S_AAL, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_TAB_S_APM, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_TAB_S_APS, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_TAB_S_APR, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_TAB_S_STP, "gfx/1-and-2-head.png"){general_template()}
+
+spriteset(signal_TAP_S_CLR, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_TAP_S_LCL, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_TAP_S_MCL, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_TAP_S_SCL, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_TAP_S_STP, "gfx/1-and-2-head.png"){general_template()}
+
+// triple aspect lights
+spriteset(signal_TAB_L_CLR, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_TAB_L_AAL, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_TAB_L_APM, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_TAB_L_APS, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_TAB_L_APR, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_TAB_L_STP, "gfx/1-and-2-head.png"){general_template()}
+
+spriteset(signal_TAP_L_CLR, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_TAP_L_LCL, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_TAP_L_MCL, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_TAP_L_SCL, "gfx/1-and-2-head.png"){general_template()}
+spriteset(signal_TAP_L_STP, "gfx/1-and-2-head.png"){general_template()}
+
+//Switches use the following format:
+//switch(FEAT_SIGNALS, SELF, [name], [variable]{
+//  value: result;
+//  value: result;
+//  return result; //Giving a "return result" at the end will give a default value when none of the other values have been met by the variable
+//}
+//The name can be any text string you like.
+//The variables are pre-selected here to give the correct results
+//The result can be a spriteset or another switch
+//
+//This switch decides which spriteset to use for each signal aspect for one signal type
+//
+//These are the templates of all switches in 'chronological' order:
+//
+// first bit is order of aspects, with a maximum of 7 (0-6)
+//switch(FEAT_SIGNALS, SELF, newname, getbits(extra_callback_info2, 0, 8)){
+//  00: stop signal;
+//  01: highest clearance;
+//  05: one step lower:
+//  04: one step lower:
+//  03: one step lower:
+//  02: one step lower:
+//}
+//switch(FEAT_SIGNALS, SELF, newname, getbits(extra_callback_info2, 8, 8)){
+//  00: signal;
+//  01: semaphore;
+//}
+//
+//  note in the following programmable and no entry need to be enabled
+//switch(FEAT_SIGNALS, SELF, newname, getbits(extra_callback_info2, 16, 8)){
+//  00: normal;
+//  01: entry;
+//  02: exit;
+//  03: combo;
+//  04: path;
+//  05: path one way;
+//  06: programmable;
+//  07: no entry;
+//}
+//(getbits(extra_callback_info2, 16, 8)
+
+switch(FEAT_SIGNALS, SELF, SABP_S, getbits(extra_callback_info2, 0, 8)){
+		00: signal_SABP_S_STP;
+		01: signal_SABP_S_CLR;
+		05: signal_SABP_S_CLR;
+		04: signal_SABP_S_CLR;
+		03: signal_SABP_S_CLR;
+		02: signal_SABP_S_APR;
+}
+
+switch(FEAT_SIGNALS, SELF, SABP_L, getbits(extra_callback_info2, 0, 8)){
+		00: signal_SABP_L_STP;
+		01: signal_SABP_L_CLR;
+		05: signal_SABP_L_CLR;
+		04: signal_SABP_L_CLR;
+		03: signal_SABP_L_CLR;
+		02: signal_SABP_L_APR;
+}
+
+switch(FEAT_SIGNALS, SELF, DAB_S, getbits(extra_callback_info2, 0, 8)){
+		00: signal_DAB_S_STP;
+		01: signal_DAB_S_CLR;
+		05: signal_DAB_S_AAL;
+		04: signal_DAB_S_APM;
+		03: signal_DAB_S_AAP;
+		02: signal_DAB_S_APR;
+}
+
+switch(FEAT_SIGNALS, SELF, DAP_S, getbits(extra_callback_info2, 0, 8)){
+		00: signal_dAP_S_STP;
+		01: signal_DAP_S_CLR;
+		05: signal_DAP_S_CLR;
+		04: signal_DAP_S_CLR;
+		03: signal_DAP_S_MCL;
+		02: signal_DAP_S_APR;
+}
+
+switch(FEAT_SIGNALS, SELF, DAB_L, getbits(extra_callback_info2, 0, 8)){
+		00: signal_DAB_L_STP;
+		01: signal_DAB_L_CLR;
+		05: signal_DAB_L_AAL;
+		04: signal_DAB_L_APM;
+		03: signal_DAB_L_AAP;
+		02: signal_DAB_L_APR;
+}
+
+switch(FEAT_SIGNALS, SELF, DAP_L, getbits(extra_callback_info2, 0, 8)){
+		00: signal_DAP_L_STP;
+		01: signal_DAP_L_CLR;
+		05: signal_DAP_L_CLR;
+		04: signal_DAP_L_CLR;
+		03: signal_DAP_L_MCL;
+		02: signal_DAP_L_APR;
+}
+
+switch(FEAT_SIGNALS, SELF, TAB_S, getbits(extra_callback_info2, 0, 8)){
+		00: signal_TAB_S_STP;
+		01: signal_TAB_S_CLR;
+		05: signal_TAB_S_AAL;
+		04: signal_TAB_S_APM;
+		03: signal_TAB_S_APS;
+		02: signal_TAB_S_APR;
+}
+
+switch(FEAT_SIGNALS, SELF, TAP_S, getbits(extra_callback_info2, 0, 8)){
+		00: signal_TAP_S_STP;
+		01: signal_TAP_S_CLR;
+		05: signal_TAP_S_CLR;
+		04: signal_TAP_S_LCL;
+		03: signal_TAP_S_MCL;
+		02: signal_TAP_S_SCL;
+}
+
+switch(FEAT_SIGNALS, SELF, TAB_L, getbits(extra_callback_info2, 0, 8)){
+		00: signal_TAB_L_STP;
+		01: signal_TAB_L_CLR;
+		05: signal_TAB_L_AAL;
+		04: signal_TAB_L_APM;
+		03: signal_TAB_L_APS;
+		02: signal_TAB_L_APR;
+}
+
+switch(FEAT_SIGNALS, SELF, TAP_L, getbits(extra_callback_info2, 0, 8)){
+		00: signal_TAP_L_STP;
+		01: signal_TAP_L_CLR;
+		05: signal_TAP_L_CLR;
+		04: signal_TAP_L_LCL;
+		03: signal_TAP_L_MCL;
+		02: signal_TAP_L_SCL;
+}
+
+switch(FEAT_SIGNALS, SELF, SABP, getbits(extra_callback_info2, 8, 8)){
+	00: SABP_L;
+	01: SABP_S;
+}
+
+switch(FEAT_SIGNALS, SELF, DAB, getbits(extra_callback_info2, 8, 8)){
+	00: DAB_L;
+	01: DAB_S;
+}
+
+switch(FEAT_SIGNALS, SELF, DAP, getbits(extra_callback_info2, 8, 8)){
+	00: DAP_L;
+	01: DAP_S;
+}
+
+switch(FEAT_SIGNALS, SELF, TAB, getbits(extra_callback_info2, 8, 8)){
+	00: TAB_L;
+	01: TAB_S;
+}
+
+switch(FEAT_SIGNALS, SELF, TAP, getbits(extra_callback_info2, 8, 8)){
+	00: TAP_L;
+	01: TAP_S;
+}
+
+switch(FEAT_SIGNALS, SELF, Singles, getbits(extra_callback_info2, 16, 8)){
+	00: SABP;
+	01: SABP;
+	02: SABP;
+	03: SABP;
+	04: SABP;
+	05: SABP;
+	06: SABP;
+	07: SABP;
+}
+
+switch(FEAT_SIGNALS, SELF, Doubles, getbits(extra_callback_info2, 16, 8)){
+	00: DAB;
+	01: DAP;
+	02: DAP;
+	03: DAP;
+	04: DAP;
+	05: DAP;
+	06: DAP;
+	07: DAP;
+}
+
+switch(FEAT_SIGNALS, SELF, Triples, getbits(extra_callback_info2, 16, 8)){
+	00: TAB;
+	01: TAP;
+	02: TAP;
+	03: TAP;
+	04: TAP;
+	05: TAP;
+	06: TAP;
+	07: TAP;
+}
+
+switch(FEAT_SIGNALS, SELF, listed_signals, signal_style){
+		01: Singles;
+		02: Doubles;
+		03: Triples;
+}
+
+item (FEAT_SIGNALS, custom_signals, 0) {
+		property{
+				extra_aspects:      4;
+
+				define_style:       1;
+				style_name:         string(STR_SIG_SINGLE);
+				style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
+				style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
+
+				define_style:       2;
+				style_name:         string(STR_SIG_DOUBLE);
+				style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
+				style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
+
+				define_style:       3;
+				style_name:         string(STR_SIG_TRIPLE);
+				style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
+				style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
+
+		}
+
+		graphics {
+				listed_signals
+		}
 }
