@@ -87,31 +87,32 @@ Different orientations of the same aspect are located on the same row, 17*3 = 51
 template aspect_cell(x, y, n) { [x+17*3*n, y, 16, 32, -8, -32] }
 
 // x and y are the 0-indexed col/row number of the signal
-template aspect(x, y) {
-    aspect_cell(17*x, 33*y, 0)
-    aspect_cell(17*x, 33*y, 1)
-    aspect_cell(17*x, 33*y, 2)
-    aspect_cell(17*x, 33*y, 3)
-    aspect_cell(17*x, 33*y, 4)
-    aspect_cell(17*x, 33*y, 5)
-    aspect_cell(17*x, 33*y, 6)
-    aspect_cell(17*x, 33*y, 7)
+template aspect(aspectColumn, signalRow) {
+    aspect_cell(17*aspectColumn, 33*signalRow, 0)
+    aspect_cell(17*aspectColumn, 33*signalRow, 1)
+    aspect_cell(17*aspectColumn, 33*signalRow, 2)
+    aspect_cell(17*aspectColumn, 33*signalRow, 3)
+    aspect_cell(17*aspectColumn, 33*signalRow, 4)
+    aspect_cell(17*aspectColumn, 33*signalRow, 5)
+    aspect_cell(17*aspectColumn, 33*signalRow, 6)
+    aspect_cell(17*aspectColumn, 33*signalRow, 7)
 }
 
 
 // single aspects
-spriteset(signal_SABP_S_CLR, "gfx/1-and-2-head.png"){aspect(0, 0)}
+// singe-aspect semaphores
+spriteset(signal_SABP_S_CLR, "gfx/1-and-2-head.png"){aspect(2, 0)}
 spriteset(signal_SABP_S_APR, "gfx/1-and-2-head.png"){aspect(1, 0)}
-spriteset(signal_SABP_S_STP, "gfx/1-and-2-head.png"){aspect(2, 0)}
-
-spriteset(signal_SABP_L_CLR, "gfx/1-and-2-head.png"){aspect(0, 4)}
+spriteset(signal_SABP_S_STP, "gfx/1-and-2-head.png"){aspect(0, 0)}
+// singe-aspect lights
+spriteset(signal_SABP_L_CLR, "gfx/1-and-2-head.png"){aspect(2, 4)}
 spriteset(signal_SABP_L_APR, "gfx/1-and-2-head.png"){aspect(1, 4)}
-spriteset(signal_SABP_L_STP, "gfx/1-and-2-head.png"){aspect(2, 4)}
+spriteset(signal_SABP_L_STP, "gfx/1-and-2-head.png"){aspect(0, 4)}
 
 // double aspect semaphores
 spriteset(signal_DAB_S_CLR, "gfx/1-and-2-head.png"){aspect(2, 1) aspect(0, 1)} // both GG and GR
 spriteset(signal_DAB_S_AAL, "gfx/1-and-2-head.png"){aspect(1, 1)}
-spriteset(signal_DAB_S_APM, "gfx/1-and-2-head.png"){aspect(3, 3)}
+spriteset(signal_DAB_S_APM, "gfx/1-and-2-head.png"){aspect(1, 2)} // YY
 spriteset(signal_DAB_S_AAP, "gfx/1-and-2-head.png"){aspect(2, 2)} // YG
 spriteset(signal_DAB_S_APR, "gfx/1-and-2-head.png"){aspect(0, 2)}
 spriteset(signal_DAB_S_STP, "gfx/1-and-2-head.png"){aspect(0, 3)}
@@ -125,7 +126,7 @@ spriteset(signal_DAP_S_STP, "gfx/1-and-2-head.png"){aspect(0, 3)}
 spriteset(signal_DAB_L_CLR, "gfx/1-and-2-head.png"){aspect(2, 5) aspect(0, 5)} // both GG and GR
 spriteset(signal_DAB_L_AAL, "gfx/1-and-2-head.png"){aspect(1, 5)}
 spriteset(signal_DAB_L_APM, "gfx/1-and-2-head.png"){aspect(3, 7)}
-spriteset(signal_DAB_L_AAP, "gfx/1-and-2-head.png"){aspect(2, 6)} // YG
+spriteset(signal_DAB_L_AAP, "gfx/1-and-2-head.png"){aspect(1, 6)} // YG
 spriteset(signal_DAB_L_APR, "gfx/1-and-2-head.png"){aspect(0, 6)}
 spriteset(signal_DAB_L_STP, "gfx/1-and-2-head.png"){aspect(0, 7)}
 
@@ -361,14 +362,14 @@ item (FEAT_SIGNALS, custom_signals, 0) {
     property {
         extra_aspects:      4;
 
-        define_style:       1;
+        define_style:       1; // single-head
         style_name:         string(STR_SIG_SINGLE);
-        style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
+        style_semaphore_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
         style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
 
-        define_style:       2;
+        define_style:       2; // double-head
         style_name:         string(STR_SIG_DOUBLE);
-        style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
+        style_semaphore_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
         style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
 
         // define_style:       3;
