@@ -6,7 +6,7 @@ BAD_ARGS=85
 
 default() {
 	mkdir -p out
-	nmlc --nfo=out/cass2.nfo --grf=out/cass2.grf cass2.nml
+	nmlc --nfo=out/cass2.nfo --grf=out/cass2.grf --palette=DOS cass2.nml
 	# nmlc --grf=cass2.grf cass2.nml
 }
 
