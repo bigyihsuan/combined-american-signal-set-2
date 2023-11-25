@@ -5,6 +5,14 @@ grf {
     url:                    string(STR_GRF_URL);
     version:                0;
     min_compatible_version: 0;
+
+    param {
+        param_replace_default {
+            type: bool;
+            name: string(STR_PARAM_REPLACE_DEFAULT_NAME);
+            desc: string(STR_PARAM_REPLACE_DEFAULT_DESC);
+        }
+    }
 }
 
 if (!extended_feature_test("action3_signals_custom_signal_sprites")) {
@@ -358,26 +366,113 @@ switch(FEAT_SIGNALS, SELF, listed_signals, signal_style){
     // 03: Triples;
 }
 
-item (FEAT_SIGNALS, custom_signals, 0) {
-    property {
-        extra_aspects:      4;
+template alternate_red_green(aspectColumn, signalRow) {
+    aspect_cell(17*aspectColumn    , 33*signalRow, 0)
+    aspect_cell(17*(aspectColumn+2), 33*signalRow, 0)
+    aspect_cell(17*aspectColumn    , 33*signalRow, 1)
+    aspect_cell(17*(aspectColumn+2), 33*signalRow, 1)
+    aspect_cell(17*aspectColumn    , 33*signalRow, 2)
+    aspect_cell(17*(aspectColumn+2), 33*signalRow, 2)
+    aspect_cell(17*aspectColumn    , 33*signalRow, 3)
+    aspect_cell(17*(aspectColumn+2), 33*signalRow, 3)
+    aspect_cell(17*aspectColumn    , 33*signalRow, 4)
+    aspect_cell(17*(aspectColumn+2), 33*signalRow, 4)
+    aspect_cell(17*aspectColumn    , 33*signalRow, 5)
+    aspect_cell(17*(aspectColumn+2), 33*signalRow, 5)
+    aspect_cell(17*aspectColumn    , 33*signalRow, 6)
+    aspect_cell(17*(aspectColumn+2), 33*signalRow, 6)
+    aspect_cell(17*aspectColumn    , 33*signalRow, 7)
+    aspect_cell(17*(aspectColumn+2), 33*signalRow, 7)
+}
 
-        define_style:       1; // single-head
-        style_name:         string(STR_SIG_SINGLE);
-        style_semaphore_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
-        style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
 
-        define_style:       2; // double-head
-        style_name:         string(STR_SIG_DOUBLE);
-        style_semaphore_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
-        style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
 
-        // define_style:       3;
-        // style_name:         string(STR_SIG_TRIPLE);
-        // style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
-        // style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
+template alternate_red_green_semaphore_path(aspectColumn, signalRow) {
+    aspect_cell(17*aspectColumn    , 33*signalRow,     0)
+    aspect_cell(17*(aspectColumn+2), 33*(signalRow-2), 0)
+    aspect_cell(17*aspectColumn    , 33*signalRow,     1)
+    aspect_cell(17*(aspectColumn+2), 33*(signalRow-2), 1)
+    aspect_cell(17*aspectColumn    , 33*signalRow,     2)
+    aspect_cell(17*(aspectColumn+2), 33*(signalRow-2), 2)
+    aspect_cell(17*aspectColumn    , 33*signalRow,     3)
+    aspect_cell(17*(aspectColumn+2), 33*(signalRow-2), 3)
+    aspect_cell(17*aspectColumn    , 33*signalRow,     4)
+    aspect_cell(17*(aspectColumn+2), 33*(signalRow-2), 4)
+    aspect_cell(17*aspectColumn    , 33*signalRow,     5)
+    aspect_cell(17*(aspectColumn+2), 33*(signalRow-2), 5)
+    aspect_cell(17*aspectColumn    , 33*signalRow,     6)
+    aspect_cell(17*(aspectColumn+2), 33*(signalRow-2), 6)
+    aspect_cell(17*aspectColumn    , 33*signalRow,     7)
+    aspect_cell(17*(aspectColumn+2), 33*(signalRow-2), 7)
+}
+
+// signals switch
+// 0xXX00 = signal variant
+// 0x00XX = signal type
+switch (FEAT_SIGNALS, SELF, sw_signals, (extra_callback_info2 & 0x00FFFF00)>>8) {
+    0x0000: sw_single_blockPath_searchlight;
+    0x0001: sw_single_blockPath_semaphore;
+    0x0400: sw_double_path_searchlight;
+    0x0401: sw_double_path_semaphore;
+    0x0500: sw_double_path_searchlight; // TODO: differentiate
+    0x0501: sw_double_path_semaphore; // TODO: differentiate
+    CB_FAILED;
+}
+
+if (param_replace_default) {
+    // replace old electric block signals
+    // electric block signals start at offset 1275
+    // also expects alternating red-green
+    replace replace_electric_block (1275, "gfx/1-and-2-head.png") {
+        alternate_red_green(0, 4)
     }
-    graphics {
-        listed_signals;
+
+    // replace new signals
+    // semaphore block = 48
+    replacenew replace_semaphore_block (SIGNALS, "gfx/1-and-2-head.png", 48) {
+        alternate_red_green(0, 0)
+    }
+    // electric path+one-way = 112
+    replacenew replace_electric_path (SIGNALS, "gfx/1-and-2-head.png", 112) {
+        alternate_red_green(0, 7) // normal
+        alternate_red_green(0, 7) // 1-way // TODO: differentiate
+    }
+    // semaphore path+one-way = 176
+    replacenew replace_electric_onewaypath (SIGNALS, "gfx/1-and-2-head.png", 176) {
+        alternate_red_green_semaphore_path(0, 7) // normal
+        alternate_red_green_semaphore_path(0, 7) // 1-way // TODO: differentiate
+    }
+
+    item (FEAT_SIGNALS, custom_signals, 0) {
+        property {
+            extra_aspects: 4;
+        }
+        graphics {
+            sw_signals;
+        }
+    }
+} else {
+    item (FEAT_SIGNALS, custom_signals, 0) {
+        property {
+            extra_aspects:      4;
+
+            define_style:       1; // single-head
+            style_name:         string(STR_SIG_SINGLE);
+            style_semaphore_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
+            style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
+
+            define_style:       2; // double-head
+            style_name:         string(STR_SIG_DOUBLE);
+            style_semaphore_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
+            style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
+
+            // define_style:       3;
+            // style_name:         string(STR_SIG_TRIPLE);
+            // style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
+            // style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
+        }
+        graphics {
+            listed_signals;
+        }
     }
 }

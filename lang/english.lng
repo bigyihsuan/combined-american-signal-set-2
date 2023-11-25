@@ -1,5 +1,5 @@
 ##grflangid 0x01
-STR_GRF_NAME            :Combined American Signals 2
+STR_GRF_NAME            :Combined American Signals Set 2
 STR_GRF_DESCRIPTION     :An unofficial successor to the "Combined Americal Signals" by Pikka et al, updated to use NML and support JGRPP's multi-aspect signals.
 STR_GRF_URL             :https://github.com/bigyihsuan/combined-american-signal-set-2
 
@@ -7,3 +7,6 @@ STR_UNSUPPORTED_VERSION :Requires an OpenTTD version which supports this feature
 
 STR_SIG_SINGLE          :Single-head
 STR_SIG_DOUBLE          :Double-head
+
+STR_PARAM_REPLACE_DEFAULT_NAME :Replace default graphics
+STR_PARAM_REPLACE_DEFAULT_DESC :Replace the default signal graphics with CASS2 graphics.
