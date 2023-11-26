@@ -15,6 +15,14 @@ grf {
         }
     }
     param {
+        param_use_double_headed_block {
+            type: bool;
+            name: string(STR_PARAM_USE_DOUBLE_BLOCK_NAME);
+            desc: string(STR_PARAM_USE_DOUBLE_BLOCK_DESC);
+            def_value: 0;
+        }
+    }
+    param {
         param_signal_gui_row_1 {
             type: int;
             name: string(STR_PARAM_SIGNAL_ROW_1_NAME);
@@ -239,10 +247,11 @@ switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_semaphore, getbits(extra_callbac
     02: signal_double_onewaypath_semaphore_APR;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_semaphore, getbits(extra_callback_info2, 16, 8)){
-    0: sw_single_block_semaphore;
-    4: sw_double_path_semaphore;
-    5: sw_double_onewaypath_semaphore;
+switch(FEAT_SIGNALS, SELF, sw_semaphore, getbits(extra_callback_info2, 16, 8) << 8 | param_use_double_headed_block){
+    0x000: sw_single_block_semaphore;
+    0x001: sw_double_block_semaphore;
+    0x400..0x401: sw_double_path_semaphore;
+    0x500..0x501: sw_double_onewaypath_semaphore;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_single_block_searchlight, getbits(extra_callback_info2, 0, 8)){
@@ -281,10 +290,11 @@ switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_searchlight, getbits(extra_callb
     02: signal_double_onewaypath_searchlight_APR;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_searchlight, getbits(extra_callback_info2, 16, 8)){
-    0: sw_single_block_searchlight;
-    4: sw_double_path_searchlight;
-    5: sw_double_onewaypath_searchlight;
+switch(FEAT_SIGNALS, SELF, sw_searchlight, getbits(extra_callback_info2, 16, 8) << 8 | param_use_double_headed_block){
+    0x000: sw_single_block_searchlight;
+    0x001: sw_double_block_searchlight;
+    0x400..0x401: sw_double_path_searchlight;
+    0x500..0x501: sw_double_onewaypath_searchlight;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_single_block_colorlight, getbits(extra_callback_info2, 0, 8)){
@@ -323,10 +333,11 @@ switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_colorlight, getbits(extra_callba
     02: signal_double_onewaypath_colorlight_APR;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_colorlight, getbits(extra_callback_info2, 16, 8)){
-    0: sw_single_block_colorlight;
-    4: sw_double_path_colorlight;
-    5: sw_double_onewaypath_colorlight;
+switch(FEAT_SIGNALS, SELF, sw_colorlight, getbits(extra_callback_info2, 16, 8) << 8 | param_use_double_headed_block){
+    0x000: sw_single_block_colorlight;
+    0x001: sw_double_block_colorlight;
+    0x400..0x401: sw_double_path_colorlight;
+    0x500..0x501: sw_double_onewaypath_colorlight;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_single_block_boposition, getbits(extra_callback_info2, 0, 8)){
@@ -365,10 +376,11 @@ switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_boposition, getbits(extra_callba
     02: signal_double_onewaypath_boposition_APR;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_boposition, getbits(extra_callback_info2, 16, 8)){
-    0: sw_single_block_boposition;
-    4: sw_double_path_boposition;
-    5: sw_double_onewaypath_boposition;
+switch(FEAT_SIGNALS, SELF, sw_boposition, getbits(extra_callback_info2, 16, 8) << 8 | param_use_double_headed_block){
+    0x000: sw_single_block_boposition;
+    0x001: sw_double_block_boposition;
+    0x400..0x401: sw_double_path_boposition;
+    0x500..0x501: sw_double_onewaypath_boposition;
 }
 
 switch(FEAT_SIGNALS, SELF, listed_signals, signal_style) {
@@ -400,19 +412,23 @@ template alternate_red_green(signalRow, aspectColumn) {
 // signals switch
 // 0xXX00 = signal variant
 // 0x00XX = signal type
-switch (FEAT_SIGNALS, SELF, sw_signals, (extra_callback_info2 & 0x00FFFF00)>>8) {
-    0x0000: sw_single_block_searchlight;
-    0x0001: sw_single_block_semaphore;
-    0x0002: sw_single_block_colorlight;
-    0x0003: sw_single_block_boposition;
-    0x0400: sw_double_path_searchlight;
-    0x0401: sw_double_path_semaphore;
-    0x0402: sw_double_path_colorlight;
-    0x0403: sw_double_path_boposition;
-    0x0500: sw_double_onewaypath_searchlight;
-    0x0501: sw_double_onewaypath_semaphore;
-    0x0502: sw_double_onewaypath_colorlight;
-    0x0503: sw_double_onewaypath_boposition;
+switch (FEAT_SIGNALS, SELF, sw_signals, (extra_callback_info2 & 0x00FFFF00) | param_use_double_headed_block) {
+    0x000000:           sw_single_block_searchlight;
+    0x000001:           sw_double_block_searchlight;
+    0x000100:           sw_single_block_semaphore;
+    0x000101:           sw_double_block_semaphore;
+    0x000200:           sw_single_block_colorlight;
+    0x000201:           sw_double_block_colorlight;
+    0x000300:           sw_single_block_boposition;
+    0x000301:           sw_double_block_boposition;
+    0x040000..0x040001: sw_double_path_searchlight;
+    0x040100..0x040101: sw_double_path_semaphore;
+    0x040200..0x040201: sw_double_path_colorlight;
+    0x040300..0x040301: sw_double_path_boposition;
+    0x050000..0x050001: sw_double_onewaypath_searchlight;
+    0x050100..0x050101: sw_double_onewaypath_semaphore;
+    0x050200..0x050201: sw_double_onewaypath_colorlight;
+    0x050300..0x050301: sw_double_onewaypath_boposition;
     CB_FAILED;
 }
 
@@ -421,76 +437,67 @@ if (param_replace_default_graphics) {
     // semaphore block = 48
     // semaphore path+one-way = 176
     if (param_signal_gui_row_1 == 0) { // semaphore
-        replacenew replace_semaphore_block_semaphore (SIGNALS, "gfx/1-and-2-head.png", 48) {
-            alternate_red_green(0, 0)
+        if (param_use_double_headed_block) {
+            replacenew (SIGNALS, "gfx/1-and-2-head.png", 48) { alternate_red_green(3, 0) }
+        } else {
+            replacenew (SIGNALS, "gfx/1-and-2-head.png", 48) { alternate_red_green(0, 0) }
         }
-        replacenew replace_semaphore_path_semaphore (SIGNALS, "gfx/1-and-2-head.png", 176) {
-            alternate_red_green(3,  0)
-            alternate_red_green(3, 24)
-        }
+        replacenew replace_semaphore_path_semaphore (SIGNALS, "gfx/1-and-2-head.png", 176) { alternate_red_green(3,  0) alternate_red_green(3, 24) }
     } else if (param_signal_gui_row_1 == 1) { // search
-        replacenew replace_semaphore_block_search (SIGNALS, "gfx/1-and-2-head.png", 48) {
-            alternate_red_green(4, 0)
+        if (param_use_double_headed_block) {
+            replacenew (SIGNALS, "gfx/1-and-2-head.png", 48) { alternate_red_green(7, 0) }
+        } else {
+            replacenew (SIGNALS, "gfx/1-and-2-head.png", 48) { alternate_red_green(4, 0) }
         }
-        replacenew replace_semaphore_path_search (SIGNALS, "gfx/1-and-2-head.png", 176) {
-            alternate_red_green(7,  0)
-            alternate_red_green(7, 24)
-        }
+        replacenew replace_semaphore_path_search (SIGNALS, "gfx/1-and-2-head.png", 176) { alternate_red_green(7,  0) alternate_red_green(7, 24) }
     } else if (param_signal_gui_row_1 == 2) { // color
-        replacenew replace_semaphore_block_color (SIGNALS, "gfx/1-and-2-head.png", 48) {
-            alternate_red_green(8, 0)
+        if (param_use_double_headed_block) {
+            replacenew (SIGNALS, "gfx/1-and-2-head.png", 48) { alternate_red_green(11, 0) }
+        } else {
+            replacenew (SIGNALS, "gfx/1-and-2-head.png", 48) { alternate_red_green(8, 0) }
         }
-        replacenew replace_semaphore_path_color (SIGNALS, "gfx/1-and-2-head.png", 176) {
-            alternate_red_green(11,  0)
-            alternate_red_green(11, 24)
-        }
+        replacenew replace_semaphore_path_color (SIGNALS, "gfx/1-and-2-head.png", 176) { alternate_red_green(11,  0) alternate_red_green(11, 24) }
     } else if (param_signal_gui_row_1 == 3) { // b&o
-        replacenew replace_semaphore_block_bo (SIGNALS, "gfx/1-and-2-head.png", 48) {
-            alternate_red_green(12, 0)
+        if (param_use_double_headed_block) {
+            replacenew (SIGNALS, "gfx/1-and-2-head.png", 48) { alternate_red_green(13, 0) }
+        } else {
+            replacenew (SIGNALS, "gfx/1-and-2-head.png", 48) { alternate_red_green(12, 0) }
         }
-        replacenew replace_semaphore_path_bo (SIGNALS, "gfx/1-and-2-head.png", 176) {
-            alternate_red_green(13,  0)
-            alternate_red_green(13, 24)
-        }
+        replacenew replace_semaphore_path_bo (SIGNALS, "gfx/1-and-2-head.png", 176) { alternate_red_green(13,  0) alternate_red_green(13, 24) }
     }
     // replace old electric block signals
     // electric block signals start at offset 1275
     // electric path+one-way = 112
     // also expects alternating red-green
     if (param_signal_gui_row_2 == 0) { // semaphore
-        replace replace_electric_block_semaphore (1275, "gfx/1-and-2-head.png") {
-            alternate_red_green(0, 0)
+        if (param_use_double_headed_block) {
+            replace (1275, "gfx/1-and-2-head.png") { alternate_red_green(3, 0) }
+        } else {
+            replace (1275, "gfx/1-and-2-head.png") { alternate_red_green(0, 0) }
         }
-        replacenew replace_electric_path_semaphore (SIGNALS, "gfx/1-and-2-head.png", 112) {
-            alternate_red_green(3,  0)
-            alternate_red_green(3, 24)
-        }
+        replacenew replace_electric_path_semaphore (SIGNALS, "gfx/1-and-2-head.png", 112) { alternate_red_green(3,  0) alternate_red_green(3, 24) }
     } else if (param_signal_gui_row_2 == 1) { // search
-        replace replace_electric_block_searchlight (1275, "gfx/1-and-2-head.png") {
-            alternate_red_green(4, 0)
+        if (param_use_double_headed_block) {
+            replace (1275, "gfx/1-and-2-head.png") { alternate_red_green(7, 0) }
+        } else {
+            replace (1275, "gfx/1-and-2-head.png") { alternate_red_green(4, 0) }
         }
-        replacenew replace_electric_path_searchlight (SIGNALS, "gfx/1-and-2-head.png", 112) {
-            alternate_red_green(7,  0)
-            alternate_red_green(7, 24)
-        }
+        replacenew replace_electric_path_searchlight (SIGNALS, "gfx/1-and-2-head.png", 112) { alternate_red_green(7,  0) alternate_red_green(7, 24) }
     } else if (param_signal_gui_row_2 == 2) { // color
-        replace replace_electric_block_colorlight (1275, "gfx/1-and-2-head.png") {
-            alternate_red_green(8, 0)
+        if (param_use_double_headed_block) {
+            replace (1275, "gfx/1-and-2-head.png") { alternate_red_green(11, 0) }
+        } else {
+            replace (1275, "gfx/1-and-2-head.png") { alternate_red_green(8, 0) }
         }
-        replacenew replace_electric_path_colorlight (SIGNALS, "gfx/1-and-2-head.png", 112) {
-            alternate_red_green(11,  0)
-            alternate_red_green(11, 24)
-        }
+        replacenew replace_electric_path_colorlight (SIGNALS, "gfx/1-and-2-head.png", 112) { alternate_red_green(11,  0) alternate_red_green(11, 24) }
     } else if (param_signal_gui_row_2 == 3) { // b&o
-        replace replace_electric_block_bo (1275, "gfx/1-and-2-head.png") {
-            alternate_red_green(12, 0)
+        if (param_use_double_headed_block) {
+            replace (1275, "gfx/1-and-2-head.png") { alternate_red_green(13, 0) }
+        } else {
+            replace (1275, "gfx/1-and-2-head.png") { alternate_red_green(12, 0) }
         }
-        replacenew replace_electric_path_bo (SIGNALS, "gfx/1-and-2-head.png", 112) {
-            alternate_red_green(13,  0)
-            alternate_red_green(13, 24)
-        }
+        replacenew replace_electric_path_bo (SIGNALS, "gfx/1-and-2-head.png", 112) { alternate_red_green(13,  0) alternate_red_green(13, 24) }
     }
-
     item (FEAT_SIGNALS, custom_signals, 0) {
         property {
             extra_aspects: 4;
