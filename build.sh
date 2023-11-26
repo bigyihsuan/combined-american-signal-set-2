@@ -8,13 +8,13 @@ sprites() {
 	python3 generateSpritesets.py | sed '/^#SPRITES#/{
 		r /dev/stdin
 		d
-		}' cass2_template.nml > cass2.nml
+		}' cass2_template.nml > out/cass2.nml
 }
 
 default() {
 	sprites
 	mkdir -p out
-	nmlc --nfo=out/cass2.nfo --grf=out/cass2.grf --palette=DOS cass2.nml
+	nmlc --nfo=out/cass2.nfo --grf=out/cass2.grf --palette=DOS out/cass2.nml
 	# nmlc --grf=cass2.grf cass2.nml
 }
 

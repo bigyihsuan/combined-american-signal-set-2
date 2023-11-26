@@ -383,131 +383,46 @@ switch(FEAT_SIGNALS, SELF, sw_boposition, getbits(extra_callback_info2, 16, 8) <
     0x500..0x501: sw_double_onewaypath_boposition;
 }
 
-switch(FEAT_SIGNALS, SELF, listed_signals, signal_style) {
+switch(FEAT_SIGNALS, SELF, sw_signal_styles, signal_style) {
     1: sw_semaphore;
     2: sw_searchlight;
     3: sw_colorlight;
     4: sw_boposition;
 }
 
-template alternate_red_green(signalRow, aspectColumn) {
-    aspect_cell(aspectColumn  , signalRow, 0)
-    aspect_cell(aspectColumn+2, signalRow, 0)
-    aspect_cell(aspectColumn  , signalRow, 1)
-    aspect_cell(aspectColumn+2, signalRow, 1)
-    aspect_cell(aspectColumn  , signalRow, 2)
-    aspect_cell(aspectColumn+2, signalRow, 2)
-    aspect_cell(aspectColumn  , signalRow, 3)
-    aspect_cell(aspectColumn+2, signalRow, 3)
-    aspect_cell(aspectColumn  , signalRow, 4)
-    aspect_cell(aspectColumn+2, signalRow, 4)
-    aspect_cell(aspectColumn  , signalRow, 5)
-    aspect_cell(aspectColumn+2, signalRow, 5)
-    aspect_cell(aspectColumn  , signalRow, 6)
-    aspect_cell(aspectColumn+2, signalRow, 6)
-    aspect_cell(aspectColumn  , signalRow, 7)
-    aspect_cell(aspectColumn+2, signalRow, 7)
+item (FEAT_SIGNALS, custom_signals, 0) {
+    property {
+        extra_aspects: 4;
+    }
 }
 
-// signals switch
-// 0xXX00 = signal variant
-// 0x00XX = signal type
-switch (FEAT_SIGNALS, SELF, sw_signals, (extra_callback_info2 & 0x00FFFF00) | param_use_double_headed_block) {
-    0x000000:           sw_single_block_searchlight;
-    0x000001:           sw_double_block_searchlight;
-    0x000100:           sw_single_block_semaphore;
-    0x000101:           sw_double_block_semaphore;
-    0x000200:           sw_single_block_colorlight;
-    0x000201:           sw_double_block_colorlight;
-    0x000300:           sw_single_block_boposition;
-    0x000301:           sw_double_block_boposition;
-    0x040000..0x040001: sw_double_path_searchlight;
-    0x040100..0x040101: sw_double_path_semaphore;
-    0x040200..0x040201: sw_double_path_colorlight;
-    0x040300..0x040301: sw_double_path_boposition;
-    0x050000..0x050001: sw_double_onewaypath_searchlight;
-    0x050100..0x050101: sw_double_onewaypath_semaphore;
-    0x050200..0x050201: sw_double_onewaypath_colorlight;
-    0x050300..0x050301: sw_double_onewaypath_boposition;
-    CB_FAILED;
+switch (FEAT_SIGNALS, SELF, replaced_signals_semaphore, param_signal_gui_row_1) {
+    0: sw_semaphore;
+    1: sw_searchlight;
+    2: sw_colorlight;
+    3: sw_boposition;
 }
+switch (FEAT_SIGNALS, SELF, replaced_signals_electric, param_signal_gui_row_2) {
+    0: sw_semaphore;
+    1: sw_searchlight;
+    2: sw_colorlight;
+    3: sw_boposition;
+}
+switch (FEAT_SIGNALS, SELF, replaced_signals, getbits(extra_callback_info2, 8, 8)) {
+    0x0: replaced_signals_electric;
+    0x1: replaced_signals_semaphore;
+}
+
 
 if (param_replace_default_graphics) {
-    // replace the semaphore bar
-    // semaphore block = 48
-    // semaphore path+one-way = 176
-    if (param_signal_gui_row_1 == 0) { // semaphore
-        if (param_use_double_headed_block) {
-            replacenew (SIGNALS, "gfx/1-and-2-head.png", 48) { alternate_red_green(3, 0) }
-        } else {
-            replacenew (SIGNALS, "gfx/1-and-2-head.png", 48) { alternate_red_green(0, 0) }
-        }
-        replacenew replace_semaphore_path_semaphore (SIGNALS, "gfx/1-and-2-head.png", 176) { alternate_red_green(3,  0) alternate_red_green(3, 24) }
-    } else if (param_signal_gui_row_1 == 1) { // search
-        if (param_use_double_headed_block) {
-            replacenew (SIGNALS, "gfx/1-and-2-head.png", 48) { alternate_red_green(7, 0) }
-        } else {
-            replacenew (SIGNALS, "gfx/1-and-2-head.png", 48) { alternate_red_green(4, 0) }
-        }
-        replacenew replace_semaphore_path_search (SIGNALS, "gfx/1-and-2-head.png", 176) { alternate_red_green(7,  0) alternate_red_green(7, 24) }
-    } else if (param_signal_gui_row_1 == 2) { // color
-        if (param_use_double_headed_block) {
-            replacenew (SIGNALS, "gfx/1-and-2-head.png", 48) { alternate_red_green(11, 0) }
-        } else {
-            replacenew (SIGNALS, "gfx/1-and-2-head.png", 48) { alternate_red_green(8, 0) }
-        }
-        replacenew replace_semaphore_path_color (SIGNALS, "gfx/1-and-2-head.png", 176) { alternate_red_green(11,  0) alternate_red_green(11, 24) }
-    } else if (param_signal_gui_row_1 == 3) { // b&o
-        if (param_use_double_headed_block) {
-            replacenew (SIGNALS, "gfx/1-and-2-head.png", 48) { alternate_red_green(13, 0) }
-        } else {
-            replacenew (SIGNALS, "gfx/1-and-2-head.png", 48) { alternate_red_green(12, 0) }
-        }
-        replacenew replace_semaphore_path_bo (SIGNALS, "gfx/1-and-2-head.png", 176) { alternate_red_green(13,  0) alternate_red_green(13, 24) }
-    }
-    // replace old electric block signals
-    // electric block signals start at offset 1275
-    // electric path+one-way = 112
-    // also expects alternating red-green
-    if (param_signal_gui_row_2 == 0) { // semaphore
-        if (param_use_double_headed_block) {
-            replace (1275, "gfx/1-and-2-head.png") { alternate_red_green(3, 0) }
-        } else {
-            replace (1275, "gfx/1-and-2-head.png") { alternate_red_green(0, 0) }
-        }
-        replacenew replace_electric_path_semaphore (SIGNALS, "gfx/1-and-2-head.png", 112) { alternate_red_green(3,  0) alternate_red_green(3, 24) }
-    } else if (param_signal_gui_row_2 == 1) { // search
-        if (param_use_double_headed_block) {
-            replace (1275, "gfx/1-and-2-head.png") { alternate_red_green(7, 0) }
-        } else {
-            replace (1275, "gfx/1-and-2-head.png") { alternate_red_green(4, 0) }
-        }
-        replacenew replace_electric_path_searchlight (SIGNALS, "gfx/1-and-2-head.png", 112) { alternate_red_green(7,  0) alternate_red_green(7, 24) }
-    } else if (param_signal_gui_row_2 == 2) { // color
-        if (param_use_double_headed_block) {
-            replace (1275, "gfx/1-and-2-head.png") { alternate_red_green(11, 0) }
-        } else {
-            replace (1275, "gfx/1-and-2-head.png") { alternate_red_green(8, 0) }
-        }
-        replacenew replace_electric_path_colorlight (SIGNALS, "gfx/1-and-2-head.png", 112) { alternate_red_green(11,  0) alternate_red_green(11, 24) }
-    } else if (param_signal_gui_row_2 == 3) { // b&o
-        if (param_use_double_headed_block) {
-            replace (1275, "gfx/1-and-2-head.png") { alternate_red_green(13, 0) }
-        } else {
-            replace (1275, "gfx/1-and-2-head.png") { alternate_red_green(12, 0) }
-        }
-        replacenew replace_electric_path_bo (SIGNALS, "gfx/1-and-2-head.png", 112) { alternate_red_green(13,  0) alternate_red_green(13, 24) }
-    }
     item (FEAT_SIGNALS, custom_signals, 0) {
-        property {
-            extra_aspects: 4;
+        graphics {
+            replaced_signals;
         }
     }
 } else {
     item (FEAT_SIGNALS, custom_signals, 0) {
         property {
-            extra_aspects:      4;
-
             define_style:       1; // semaphore
             style_name:         string(STR_SIG_SEMAPHORE);
             style_semaphore_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
@@ -525,7 +440,7 @@ if (param_replace_default_graphics) {
             style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
         }
         graphics {
-            listed_signals;
+            sw_signal_styles;
         }
     }
 }
