@@ -4,17 +4,31 @@ A JGRPP-only, unofficial successor to the "Combined Americal Signal Set" by Pikk
 
 ## v1 Goals
 
-- [ ] Reimplement all signals (for block, path, one-way path) from CASS1
-  - [ ] Semaphore
-  - [ ] Searchlight
-  - [ ] Color light
-  - [ ] B&O Position light
-- [ ] With multi-aspect
+- [x] Reimplement all signals from CASS1
+  - [x] Semaphore
+  - [x] Searchlight
+  - [x] Color light
+  - [x] B&O Position light
+- [x] For signals
+  - [x] Block
+  - [x] Path
+  - [x] One-way Path
+- [x] With multi-aspect
 - [ ] Parameters
   - [ ] Replace default graphics. Default on. If off, use JGRPP styles.
   - [ ] Use double-head block signals. Default off.
   - [ ] Signal GUI row 1 signal style. Default semaphores.
   - [ ] Signal GUI row 2 signal style. Default searchlights.
+
+## Post-v1 Goals
+
+- [ ] Vanilla OpenTTD signals
+  - [ ] Entry
+  - [ ] Exit
+  - [ ] Combo
+- [ ] JGRPP signals
+  - [ ] No-entry
+- [ ] Triple-headed signals
 
 ## Useful Links
 
