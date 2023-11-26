@@ -451,15 +451,40 @@ if (param_replace_default_graphics) {
     }
     // replace old electric block signals
     // electric block signals start at offset 1275
-    // also expects alternating red-green
-    replace replace_electric_block (1275, "gfx/1-and-2-head.png") {
-        alternate_red_green(4, 0)
-    }
-
     // electric path+one-way = 112
-    replacenew replace_electric_path (SIGNALS, "gfx/1-and-2-head.png", 112) {
-        alternate_red_green(7,  0)
-        alternate_red_green(7, 24)
+    // also expects alternating red-green
+    if (param_signal_gui_row_2 == 0) { // semaphore
+        replace replace_electric_block_semaphore (1275, "gfx/1-and-2-head.png") {
+            alternate_red_green(0, 0)
+        }
+        replacenew replace_electric_path_semaphore (SIGNALS, "gfx/1-and-2-head.png", 112) {
+            alternate_red_green(3,  0)
+            alternate_red_green(3, 24)
+        }
+    } else if (param_signal_gui_row_2 == 1) { // search
+        replace replace_electric_block_searchlight (1275, "gfx/1-and-2-head.png") {
+            alternate_red_green(4, 0)
+        }
+        replacenew replace_electric_path_searchlight (SIGNALS, "gfx/1-and-2-head.png", 112) {
+            alternate_red_green(7,  0)
+            alternate_red_green(7, 24)
+        }
+    } else if (param_signal_gui_row_2 == 2) { // color
+        replace replace_electric_block_colorlight (1275, "gfx/1-and-2-head.png") {
+            alternate_red_green(8, 0)
+        }
+        replacenew replace_electric_path_colorlight (SIGNALS, "gfx/1-and-2-head.png", 112) {
+            alternate_red_green(11,  0)
+            alternate_red_green(11, 24)
+        }
+    } else if (param_signal_gui_row_2 == 3) { // b&o
+        replace replace_electric_block_bo (1275, "gfx/1-and-2-head.png") {
+            alternate_red_green(12, 0)
+        }
+        replacenew replace_electric_path_bo (SIGNALS, "gfx/1-and-2-head.png", 112) {
+            alternate_red_green(13,  0)
+            alternate_red_green(13, 24)
+        }
     }
 
     item (FEAT_SIGNALS, custom_signals, 0) {
