@@ -106,69 +106,7 @@ template aspect(signalRow, aspectColumn) {
     aspect_cell(17*aspectColumn, 33*signalRow, 7)
 }
 
-spriteset(signal_single_block_semaphore_CLR, "gfx/1-and-2-head.png"){aspect(0, 2)}
-spriteset(signal_single_block_semaphore_APR, "gfx/1-and-2-head.png"){aspect(0, 1)}
-spriteset(signal_single_block_semaphore_STP, "gfx/1-and-2-head.png"){aspect(0, 0)}
-
-spriteset(signal_double_block_semaphore_CLR, "gfx/1-and-2-head.png"){aspect(1, 2) aspect(1, 0)}
-spriteset(signal_double_block_semaphore_AAL, "gfx/1-and-2-head.png"){aspect(1, 1)}
-spriteset(signal_double_block_semaphore_APM, "gfx/1-and-2-head.png"){aspect(2, 1)}
-spriteset(signal_double_block_semaphore_AAP, "gfx/1-and-2-head.png"){aspect(2, 2)}
-spriteset(signal_double_block_semaphore_APR, "gfx/1-and-2-head.png"){aspect(2, 0)}
-spriteset(signal_double_block_semaphore_STP, "gfx/1-and-2-head.png"){aspect(3, 0)}
-
-spriteset(signal_double_path_semaphore_CLR, "gfx/1-and-2-head.png"){aspect(1, 2) aspect(1, 0)}
-spriteset(signal_double_path_semaphore_MCL, "gfx/1-and-2-head.png"){aspect(3, 2)}
-spriteset(signal_double_path_semaphore_APR, "gfx/1-and-2-head.png"){aspect(2, 0)}
-spriteset(signal_double_path_semaphore_STP, "gfx/1-and-2-head.png"){aspect(3, 0)}
-
-spriteset(signal_double_onewaypath_semaphore_CLR, "gfx/1-and-2-head.png"){aspect(1, 26) aspect(1, 24)}
-spriteset(signal_double_onewaypath_semaphore_MCL, "gfx/1-and-2-head.png"){aspect(3, 26)}
-spriteset(signal_double_onewaypath_semaphore_APR, "gfx/1-and-2-head.png"){aspect(2, 24)}
-spriteset(signal_double_onewaypath_semaphore_STP, "gfx/1-and-2-head.png"){aspect(3, 24)}
-
-spriteset(signal_single_block_searchlight_CLR, "gfx/1-and-2-head.png"){aspect(4, 2)}
-spriteset(signal_single_block_searchlight_APR, "gfx/1-and-2-head.png"){aspect(4, 1)}
-spriteset(signal_single_block_searchlight_STP, "gfx/1-and-2-head.png"){aspect(4, 0)}
-
-spriteset(signal_double_block_searchlight_CLR, "gfx/1-and-2-head.png"){aspect(5, 2) aspect(5, 0)}
-spriteset(signal_double_block_searchlight_AAL, "gfx/1-and-2-head.png"){aspect(5, 1)}
-spriteset(signal_double_block_searchlight_APM, "gfx/1-and-2-head.png"){aspect(6, 1)}
-spriteset(signal_double_block_searchlight_AAP, "gfx/1-and-2-head.png"){aspect(6, 2)}
-spriteset(signal_double_block_searchlight_APR, "gfx/1-and-2-head.png"){aspect(6, 0)}
-spriteset(signal_double_block_searchlight_STP, "gfx/1-and-2-head.png"){aspect(7, 0)}
-
-spriteset(signal_double_path_searchlight_CLR, "gfx/1-and-2-head.png"){aspect(5, 2) aspect(5, 0)}
-spriteset(signal_double_path_searchlight_MCL, "gfx/1-and-2-head.png"){aspect(7, 2)}
-spriteset(signal_double_path_searchlight_APR, "gfx/1-and-2-head.png"){aspect(6, 0)}
-spriteset(signal_double_path_searchlight_STP, "gfx/1-and-2-head.png"){aspect(7, 0)}
-
-spriteset(signal_double_onewaypath_searchlight_CLR, "gfx/1-and-2-head.png"){aspect(5, 26) aspect(5, 24)}
-spriteset(signal_double_onewaypath_searchlight_MCL, "gfx/1-and-2-head.png"){aspect(7, 26)}
-spriteset(signal_double_onewaypath_searchlight_APR, "gfx/1-and-2-head.png"){aspect(6, 24)}
-spriteset(signal_double_onewaypath_searchlight_STP, "gfx/1-and-2-head.png"){aspect(7, 24)}
-
-spriteset(signal_single_block_colorlight_CLR, "gfx/1-and-2-head.png"){aspect(8, 2)}
-spriteset(signal_single_block_colorlight_APR, "gfx/1-and-2-head.png"){aspect(8, 1)}
-spriteset(signal_single_block_colorlight_STP, "gfx/1-and-2-head.png"){aspect(8, 0)}
-
-spriteset(signal_double_block_colorlight_CLR, "gfx/1-and-2-head.png"){aspect(9, 2) aspect(9, 0)}
-spriteset(signal_double_block_colorlight_AAL, "gfx/1-and-2-head.png"){aspect(9, 1)}
-spriteset(signal_double_block_colorlight_APM, "gfx/1-and-2-head.png"){aspect(10, 1)}
-spriteset(signal_double_block_colorlight_AAP, "gfx/1-and-2-head.png"){aspect(10, 2)}
-spriteset(signal_double_block_colorlight_APR, "gfx/1-and-2-head.png"){aspect(10, 0)}
-spriteset(signal_double_block_colorlight_STP, "gfx/1-and-2-head.png"){aspect(11, 0)}
-
-spriteset(signal_double_path_colorlight_CLR, "gfx/1-and-2-head.png"){aspect(9, 2) aspect(9, 0)}
-spriteset(signal_double_path_colorlight_MCL, "gfx/1-and-2-head.png"){aspect(11, 2)}
-spriteset(signal_double_path_colorlight_APR, "gfx/1-and-2-head.png"){aspect(10, 0)}
-spriteset(signal_double_path_colorlight_STP, "gfx/1-and-2-head.png"){aspect(11, 0)}
-
-spriteset(signal_double_onewaypath_colorlight_CLR, "gfx/1-and-2-head.png"){aspect(9, 26) aspect(9, 24)}
-spriteset(signal_double_onewaypath_colorlight_MCL, "gfx/1-and-2-head.png"){aspect(11, 26)}
-spriteset(signal_double_onewaypath_colorlight_APR, "gfx/1-and-2-head.png"){aspect(10, 24)}
-spriteset(signal_double_onewaypath_colorlight_STP, "gfx/1-and-2-head.png"){aspect(11, 24)}
-
+#SPRITES#
 
 spriteset(signal_single_block_boposition_CLR, "gfx/1-and-2-head.png"){aspect(12, 2)}
 spriteset(signal_single_block_boposition_APR, "gfx/1-and-2-head.png"){aspect(12, 1)}

@@ -14,10 +14,10 @@ A JGRPP-only, unofficial successor to the "Combined Americal Signal Set" by Pikk
 
 ### TODOs
 
-- [ ] Reimplement searchlight signals
+- [x] Reimplement searchlight signals
 - [ ] Reimplement color signals
 - [ ] Reimplement B&O signals
-- [ ] Reimplement semaphore signals
+- [x] Reimplement semaphore signals
 - [ ] Implement parameters (no need to manually edit openttd.cfg)
   - [ ] Semaphore bar selection
   - [ ] Electric bar selection
