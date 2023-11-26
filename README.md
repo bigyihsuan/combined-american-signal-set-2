@@ -15,9 +15,9 @@ A JGRPP-only, unofficial successor to the "Combined Americal Signal Set" by Pikk
   - [x] One-way Path
 - [x] With multi-aspect
 - [ ] Parameters
-  - [ ] Replace default graphics. Default on. If off, use JGRPP styles.
+  - [x] Replace default graphics. Default on. If off, use JGRPP styles.
   - [ ] Use double-head block signals. Default off.
-  - [ ] Signal GUI row 1 signal style. Default semaphores.
+  - [x] Signal GUI row 1 signal style. Default semaphores.
   - [ ] Signal GUI row 2 signal style. Default searchlights.
 
 ## Post-v1 Goals

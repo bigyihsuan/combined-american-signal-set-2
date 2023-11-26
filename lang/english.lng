@@ -5,13 +5,27 @@ STR_GRF_URL             :https://github.com/bigyihsuan/combined-american-signal-
 
 STR_UNSUPPORTED_VERSION :Requires an OpenTTD version which supports this feature such as JGR's patchpack v0.43.0 or later.
 
-STR_SIG_SINGLE          :Single-head
-STR_SIG_DOUBLE          :Double-head
+STR_SIG_SINGLE      :Single-head
+STR_SIG_DOUBLE      :Double-head
 
-STR_SIG_SEMAPHORE         :Semaphore
-STR_SIG_SEARCHLIGHT       :Searchlight
-STR_SIG_COLORLIGHT        :Color-light
-STR_SIG_BOPOSITION         :B&O Color position
+STR_SIG_SEMAPHORE   :Semaphore
+STR_SIG_SEARCHLIGHT :Searchlight
+STR_SIG_COLORLIGHT  :Color-light
+STR_SIG_BOPOSITION  :B&O Color position
 
 STR_PARAM_REPLACE_DEFAULT_NAME :Replace default graphics
-STR_PARAM_REPLACE_DEFAULT_DESC :Replace the default signal graphics with CASS2 graphics.
+STR_PARAM_REPLACE_DEFAULT_DESC :Replace the default signal graphics with CASS2 graphics. If off, the JGRPP signal style selector will be used.{}Default on.
+
+STR_PARAM_USE_DOUBLE_BLOCK_NAME :Use double-headed block signals
+STR_PARAM_USE_DOUBLE_BLOCK_DESC :Use double-headed block signals instead of single-headed block signals. Note that there is no visual difference between double-headed block and path signals.{}Default off.
+
+STR_PARAM_SIGNAL_ROW_1_NAME :Signal style for signal GUI top row
+STR_PARAM_SIGNAL_ROW_1_DESC :The selected signal style for the top row of the signal GUI. Requires "Replace default graphics" to be on.{}Default "semaphore".
+
+STR_PARAM_SIGNAL_ROW_2_NAME :Signal style for signal GUI bottom row
+STR_PARAM_SIGNAL_ROW_2_DESC :The selected signal style for the bottom row of the signal GUI. Requires "Replace default graphics" to be on.{}Default "searchlight".
+
+STR_PARAM_VALUE_SEMAPHORE   :Semaphore
+STR_PARAM_VALUE_SEARCHLIGHT :Searchlight
+STR_PARAM_VALUE_COLORLIGHT  :Color light
+STR_PARAM_VALUE_BOPOSITION  :B&O position
