@@ -153,12 +153,12 @@ spriteset(signal_single_block_boposition_CLR, "gfx/1-and-2-head.png"){aspect(12,
 spriteset(signal_single_block_boposition_APR, "gfx/1-and-2-head.png"){aspect(12, 1)}
 spriteset(signal_single_block_boposition_STP, "gfx/1-and-2-head.png"){aspect(12, 0)}
 
-spriteset(signal_double_block_boposition_CLR, "gfx/1-and-2-head.png"){aspect(13, 15)}
-spriteset(signal_double_block_boposition_AAL, "gfx/1-and-2-head.png"){aspect(13, 14)}
-spriteset(signal_double_block_boposition_APM, "gfx/1-and-2-head.png"){aspect(13, 14)}
-spriteset(signal_double_block_boposition_AAP, "gfx/1-and-2-head.png"){aspect(13, 14)}
-spriteset(signal_double_block_boposition_APR, "gfx/1-and-2-head.png"){aspect(13, 14)}
-spriteset(signal_double_block_boposition_STP, "gfx/1-and-2-head.png"){aspect(13, 13)}
+spriteset(signal_double_block_boposition_CLR, "gfx/1-and-2-head.png"){aspect(13, 2)}
+spriteset(signal_double_block_boposition_AAL, "gfx/1-and-2-head.png"){aspect(13, 1)}
+spriteset(signal_double_block_boposition_APM, "gfx/1-and-2-head.png"){aspect(13, 1)}
+spriteset(signal_double_block_boposition_AAP, "gfx/1-and-2-head.png"){aspect(13, 1)}
+spriteset(signal_double_block_boposition_APR, "gfx/1-and-2-head.png"){aspect(13, 1)}
+spriteset(signal_double_block_boposition_STP, "gfx/1-and-2-head.png"){aspect(13, 0)}
 
 spriteset(signal_double_path_boposition_CLR, "gfx/1-and-2-head.png"){aspect(13, 2)}
 spriteset(signal_double_path_boposition_MCL, "gfx/1-and-2-head.png"){aspect(13, 1)}
