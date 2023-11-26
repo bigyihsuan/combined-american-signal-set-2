@@ -8,5 +8,10 @@ STR_UNSUPPORTED_VERSION :Requires an OpenTTD version which supports this feature
 STR_SIG_SINGLE          :Single-head
 STR_SIG_DOUBLE          :Double-head
 
+STR_SIG_SEMAPHORE         :Semaphore
+STR_SIG_SEARCHLIGHT       :Searchlight
+STR_SIG_COLORLIGHT        :Color-light
+STR_SIG_BOPOSITION         :B&O Color position
+
 STR_PARAM_REPLACE_DEFAULT_NAME :Replace default graphics
 STR_PARAM_REPLACE_DEFAULT_DESC :Replace the default signal graphics with CASS2 graphics.

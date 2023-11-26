@@ -181,14 +181,14 @@ spriteset(signal_double_block_boposition_AAP, "gfx/1-and-2-head.png"){aspect(13,
 spriteset(signal_double_block_boposition_APR, "gfx/1-and-2-head.png"){aspect(13, 14)}
 spriteset(signal_double_block_boposition_STP, "gfx/1-and-2-head.png"){aspect(13, 13)}
 
-spriteset(signal_double_path_boposition_CLR, "gfx/1-and-2-head.png"){aspect(13, 15)}
-spriteset(signal_double_path_boposition_MCL, "gfx/1-and-2-head.png"){aspect(13, 14)}
-spriteset(signal_double_path_boposition_APR, "gfx/1-and-2-head.png"){aspect(13, 14)}
-spriteset(signal_double_path_boposition_STP, "gfx/1-and-2-head.png"){aspect(13, 13)}
+spriteset(signal_double_path_boposition_CLR, "gfx/1-and-2-head.png"){aspect(13, 2)}
+spriteset(signal_double_path_boposition_MCL, "gfx/1-and-2-head.png"){aspect(13, 1)}
+spriteset(signal_double_path_boposition_APR, "gfx/1-and-2-head.png"){aspect(13, 1)}
+spriteset(signal_double_path_boposition_STP, "gfx/1-and-2-head.png"){aspect(13, 0)}
 
-spriteset(signal_double_onewaypath_boposition_CLR, "gfx/1-and-2-head.png"){aspect(13, 24)}
-spriteset(signal_double_onewaypath_boposition_MCL, "gfx/1-and-2-head.png"){aspect(13, 24)}
-spriteset(signal_double_onewaypath_boposition_APR, "gfx/1-and-2-head.png"){aspect(13, 24)}
+spriteset(signal_double_onewaypath_boposition_CLR, "gfx/1-and-2-head.png"){aspect(13, 26)}
+spriteset(signal_double_onewaypath_boposition_MCL, "gfx/1-and-2-head.png"){aspect(13, 25)}
+spriteset(signal_double_onewaypath_boposition_APR, "gfx/1-and-2-head.png"){aspect(13, 25)}
 spriteset(signal_double_onewaypath_boposition_STP, "gfx/1-and-2-head.png"){aspect(13, 24)}
 
 //Switches use the following format:
@@ -268,6 +268,13 @@ switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_semaphore, getbits(extra_callbac
     02: signal_double_onewaypath_semaphore_APR;
 }
 
+switch(FEAT_SIGNALS, SELF, sw_semaphore, getbits(extra_callback_info2, 16, 8)){
+    0: sw_single_block_semaphore;
+    4: sw_double_path_semaphore;
+    5: sw_double_onewaypath_semaphore;
+    default: sw_double_block_semaphore;
+}
+
 switch(FEAT_SIGNALS, SELF, sw_single_block_searchlight, getbits(extra_callback_info2, 0, 8)){
     00: signal_single_block_searchlight_STP;
     01: signal_single_block_searchlight_CLR;
@@ -302,6 +309,13 @@ switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_searchlight, getbits(extra_callb
     04: signal_double_onewaypath_searchlight_CLR;
     03: signal_double_onewaypath_searchlight_MCL;
     02: signal_double_onewaypath_searchlight_APR;
+}
+
+switch(FEAT_SIGNALS, SELF, sw_searchlight, getbits(extra_callback_info2, 16, 8)){
+    0: sw_single_block_searchlight;
+    4: sw_double_path_searchlight;
+    5: sw_double_onewaypath_searchlight;
+    default: sw_double_block_searchlight;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_single_block_colorlight, getbits(extra_callback_info2, 0, 8)){
@@ -340,6 +354,13 @@ switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_colorlight, getbits(extra_callba
     02: signal_double_onewaypath_colorlight_APR;
 }
 
+switch(FEAT_SIGNALS, SELF, sw_colorlight, getbits(extra_callback_info2, 16, 8)){
+    0: sw_single_block_colorlight;
+    4: sw_double_path_colorlight;
+    5: sw_double_onewaypath_colorlight;
+    default: sw_double_block_colorlight;
+}
+
 switch(FEAT_SIGNALS, SELF, sw_single_block_boposition, getbits(extra_callback_info2, 0, 8)){
     00: signal_single_block_boposition_STP;
     01: signal_single_block_boposition_CLR;
@@ -376,109 +397,18 @@ switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_boposition, getbits(extra_callba
     02: signal_double_onewaypath_boposition_APR;
 }
 
-// switch(FEAT_SIGNALS, SELF, TAB_semaphore, getbits(extra_callback_info2, 0, 8)){
-//     00: signal_TAB_semaphore_STP;
-//     01: signal_TAB_semaphore_CLR;
-//     05: signal_TAB_semaphore_AAL;
-//     04: signal_TAB_semaphore_APM;
-//     03: signal_TAB_semaphore_APS;
-//     02: signal_TAB_semaphore_APR;
-// }
-
-// switch(FEAT_SIGNALS, SELF, TAP_semaphore, getbits(extra_callback_info2, 0, 8)){
-//     00: signal_TAP_semaphore_STP;
-//     01: signal_TAP_semaphore_CLR;
-//     05: signal_TAP_semaphore_CLR;
-//     04: signal_TAP_semaphore_searchlightCL;
-//     03: signal_TAP_semaphore_MCL;
-//     02: signal_TAP_semaphore_SCL;
-// }
-
-// switch(FEAT_SIGNALS, SELF, TAB_searchlight, getbits(extra_callback_info2, 0, 8)){
-//     00: signal_TAB_searchlight_STP;
-//     01: signal_TAB_searchlight_CLR;
-//     05: signal_TAB_searchlight_AAL;
-//     04: signal_TAB_searchlight_APM;
-//     03: signal_TAB_searchlight_APS;
-//     02: signal_TAB_searchlight_APR;
-// }
-
-// switch(FEAT_SIGNALS, SELF, TAP_searchlight, getbits(extra_callback_info2, 0, 8)){
-//     00: signal_TAP_searchlight_STP;
-//     01: signal_TAP_searchlight_CLR;
-//     05: signal_TAP_searchlight_CLR;
-//     04: signal_TAP_searchlight_searchlightCL;
-//     03: signal_TAP_searchlight_MCL;
-//     02: signal_TAP_searchlight_SCL;
-// }
-
-switch(FEAT_SIGNALS, SELF, sw_single_block, getbits(extra_callback_info2, 8, 8)){
-    00: sw_single_block_searchlight;
-    01: sw_single_block_semaphore;
+switch(FEAT_SIGNALS, SELF, sw_boposition, getbits(extra_callback_info2, 16, 8)){
+    0: sw_single_block_boposition;
+    4: sw_double_path_boposition;
+    5: sw_double_onewaypath_boposition;
+    default: sw_double_block_boposition;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_double_block, getbits(extra_callback_info2, 8, 8)){
-    00: sw_double_block_searchlight;
-    01: sw_double_block_semaphore;
-}
-
-switch(FEAT_SIGNALS, SELF, sw_double_path, getbits(extra_callback_info2, 8, 8)){
-    00: sw_double_path_searchlight;
-    01: sw_double_path_semaphore;
-}
-
-switch(FEAT_SIGNALS, SELF, sw_double_onewaypath, getbits(extra_callback_info2, 8, 8)){
-    00: sw_double_onewaypath_searchlight;
-    01: sw_double_onewaypath_semaphore;
-}
-
-// switch(FEAT_SIGNALS, SELF, TAB, getbits(extra_callback_info2, 8, 8)){
-//     00: TAB_searchlight;
-//     01: TAB_semaphore;
-// }
-
-// switch(FEAT_SIGNALS, SELF, TAP, getbits(extra_callback_info2, 8, 8)){
-//     00: TAP_searchlight;
-//     01: TAP_semaphore;
-// }
-
-switch(FEAT_SIGNALS, SELF, Singles, getbits(extra_callback_info2, 16, 8)){
-    00: sw_single_block;
-    01: sw_single_block;
-    02: sw_single_block;
-    03: sw_single_block;
-    04: sw_single_block;
-    05: sw_single_block;
-    06: sw_single_block;
-    07: sw_single_block;
-}
-
-switch(FEAT_SIGNALS, SELF, Doubles, getbits(extra_callback_info2, 16, 8)){
-    00: sw_double_block;
-    01: sw_double_path;
-    02: sw_double_path;
-    03: sw_double_path;
-    04: sw_double_path;
-    05: sw_double_onewaypath;
-    06: sw_double_path;
-    07: sw_double_path;
-}
-
-// switch(FEAT_SIGNALS, SELF, Triples, getbits(extra_callback_info2, 16, 8)){
-//     00: TAB;
-//     01: TAP;
-//     02: TAP;
-//     03: TAP;
-//     04: TAP;
-//     05: TAP;
-//     06: TAP;
-//     07: TAP;
-// }
-
-switch(FEAT_SIGNALS, SELF, listed_signals, signal_style){
-    01: Singles;
-    02: Doubles;
-    // 03: Triples;
+switch(FEAT_SIGNALS, SELF, listed_signals, signal_style) {
+    1: sw_semaphore;
+    2: sw_searchlight;
+    3: sw_colorlight;
+    4: sw_boposition;
 }
 
 template alternate_red_green(aspectColumn, signalRow) {
@@ -577,20 +507,21 @@ if (param_replace_default) {
         property {
             extra_aspects:      4;
 
-            define_style:       1; // single-head
-            style_name:         string(STR_SIG_SINGLE);
+            define_style:       1; // semaphore
+            style_name:         string(STR_SIG_SEMAPHORE);
             style_semaphore_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
-            style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
 
-            define_style:       2; // double-head
-            style_name:         string(STR_SIG_DOUBLE);
-            style_semaphore_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
+            define_style:       2; // searchlight
+            style_name:         string(STR_SIG_SEARCHLIGHT);
             style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
-
-            // define_style:       3;
-            // style_name:         string(STR_SIG_TRIPLE);
-            // style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
-            // style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
+            
+            define_style:       3; // colorlight
+            style_name:         string(STR_SIG_COLORLIGHT);
+            style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
+            
+            define_style:       4; // b&o color position
+            style_name:         string(STR_SIG_BOPOSITION);
+            style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
         }
         graphics {
             listed_signals;
