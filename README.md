@@ -13,12 +13,13 @@ A JGRPP-only, unofficial successor to the "Combined Americal Signal Set" by Pikk
   - [x] Block
   - [x] Path
   - [x] One-way Path
+  - [ ] No-entry
 - [x] With multi-aspect
-- [ ] Parameters
+- [x] Parameters
   - [x] Replace default graphics. Default on. If off, use JGRPP styles.
-  - [ ] Use double-head block signals. Default off.
+  - [x] Use double-head block signals. Default off.
   - [x] Signal GUI row 1 signal style. Default semaphores.
-  - [ ] Signal GUI row 2 signal style. Default searchlights.
+  - [x] Signal GUI row 2 signal style. Default searchlights.
 
 ## Post-v1 Goals
 
@@ -26,8 +27,6 @@ A JGRPP-only, unofficial successor to the "Combined Americal Signal Set" by Pikk
   - [ ] Entry
   - [ ] Exit
   - [ ] Combo
-- [ ] JGRPP signals
-  - [ ] No-entry
 - [ ] Triple-headed signals
 
 ## Useful Links
