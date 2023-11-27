@@ -67,3 +67,9 @@ A JGRPP-only, unofficial successor to the "Combined Americal Signal Set" by Pikk
 - [Docs on how multi-aspect works](https://jgrennison.github.io/OpenTTD-patches/newgrf-additions-nml.html#signal-graphics:~:text=set%20to%20zero.-,extra_aspects,-0%20-%206)
 - [JGR's sample grf](https://github.com/JGRennison/multi-aspect-signals-grf)
 - [grf-py](https://github.com/citymania-org/grf-py)
+
+## Contributors
+
+- Pikka et al: original GRF and graphics (under GPL)
+- osswix: Signal aspect planning, bulk of the code
+- bigyihsuan: code, graphics

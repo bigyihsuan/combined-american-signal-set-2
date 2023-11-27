@@ -12,10 +12,10 @@ sprites() {
 }
 
 default() {
-	sprites
 	mkdir -p out
-	nmlc --nfo=out/cass2.nfo --grf=out/cass2.grf --palette=DOS out/cass2.nml
-	# nmlc --grf=cass2.grf cass2.nml
+	sprites
+	# nmlc --nfo=out/cass2.nfo --grf=out/cass2.grf --palette=DOS out/cass2.nml
+	nmlc --palette=DOS --grf=out/cass2.grf out/cass2.nml
 }
 
 install() {
@@ -26,11 +26,15 @@ install() {
 }
 
 bundle() {
+	rm cass2.tar
+	rm -r dist
+	mkdir -p dist
 	default
-	cp README.md out/readme.txt
-	cp LICENSE out/license.txt
-	cp changelog.md out/changelog.txt
-	tar cvf cass2.tar out
+	cp out/cass2.grf dist
+	cp README.md dist/readme.txt
+	cp LICENSE dist/license.txt
+	cp changelog.md dist/changelog.txt
+	tar cvf cass2.tar dist
 }
 
 if [[ "$#" -eq 0 ]]; then
