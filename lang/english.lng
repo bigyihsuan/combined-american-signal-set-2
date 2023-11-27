@@ -1,6 +1,6 @@
 ##grflangid 0x01
 STR_GRF_NAME            :Combined American Signals Set 2
-STR_GRF_DESCRIPTION     :An unofficial successor to the "Combined Americal Signals" by Pikka et al, updated to use NML and support JGRPP's multi-aspect signals.
+STR_GRF_DESCRIPTION     :An unofficial successor to the "Combined Americal Signals" by Pikka et al, updated to use NML and support JGRPP's multi-aspect signals.{}This GRF requires an OpenTTD version which supports this feature such as JGR's patchpack v0.43.0 or later.
 STR_GRF_URL             :https://github.com/bigyihsuan/combined-american-signal-set-2
 
 STR_UNSUPPORTED_VERSION :Requires an OpenTTD version which supports this feature such as JGR's patchpack v0.43.0 or later.
