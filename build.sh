@@ -5,7 +5,7 @@ USAGE="usage: ./build.sh (default | install | bundle)"
 BAD_ARGS=85
 
 sprites() {
-	python3 generateSpritesets.py | sed '/^#SPRITES#/{
+	python3 generateSpritesets.py | sed '/^\/\/!SPRITES!\/\//{
 		r /dev/stdin
 		d
 		}' cass2_template.nml > out/cass2.nml

@@ -133,7 +133,8 @@ Each signal is 16x32px, with 1 pixel in between on all sides.
 => Each signal has their top left corner on (17i, 33j), where i >= 0 and j >= 0.
 Different orientations of the same aspect are located on the same row, 17*3 = 51px on the x-axis.
 */
-template aspect_cell(x, y, n) { [17*x+51*n, 33*y, 16, 32, -8, -32] }
+template cell(x, y, n, k) { [17*x+17*k*n, 33*y, 16, 32, -8, -32] }
+template aspect_cell(x, y, n) { cell(x, y, n, 3) }
 
 // x and y are the 0-indexed col/row number of the signal
 template aspect(signalRow, aspectColumn) {
@@ -146,8 +147,18 @@ template aspect(signalRow, aspectColumn) {
     aspect_cell(aspectColumn, signalRow, 6)
     aspect_cell(aspectColumn, signalRow, 7)
 }
+template consecutive(signalRow, aspectColumn) {
+    cell(aspectColumn, signalRow, 0, 1)
+    cell(aspectColumn, signalRow, 1, 1)
+    cell(aspectColumn, signalRow, 2, 1)
+    cell(aspectColumn, signalRow, 3, 1)
+    cell(aspectColumn, signalRow, 4, 1)
+    cell(aspectColumn, signalRow, 5, 1)
+    cell(aspectColumn, signalRow, 6, 1)
+    cell(aspectColumn, signalRow, 7, 1)
+}
 
-#SPRITES#
+//!SPRITES!//
 
 spriteset(signal_single_block_boposition_CLR, "gfx/1-and-2-head.png"){aspect(12, 2)}
 spriteset(signal_single_block_boposition_APR, "gfx/1-and-2-head.png"){aspect(12, 1)}
@@ -169,6 +180,8 @@ spriteset(signal_double_onewaypath_boposition_CLR, "gfx/1-and-2-head.png"){aspec
 spriteset(signal_double_onewaypath_boposition_MCL, "gfx/1-and-2-head.png"){aspect(13, 25)}
 spriteset(signal_double_onewaypath_boposition_APR, "gfx/1-and-2-head.png"){aspect(13, 25)}
 spriteset(signal_double_onewaypath_boposition_STP, "gfx/1-and-2-head.png"){aspect(13, 24)}
+
+spriteset(signal_noentry, "gfx/1-and-2-head.png"){consecutive(14,0)}
 
 //Switches use the following format:
 //switch(FEAT_SIGNALS, SELF, [name], [variable]{
@@ -252,6 +265,7 @@ switch(FEAT_SIGNALS, SELF, sw_semaphore, getbits(extra_callback_info2, 16, 8) <<
     0x001: sw_double_block_semaphore;
     0x400..0x401: sw_double_path_semaphore;
     0x500..0x501: sw_double_onewaypath_semaphore;
+    0x700..0x701: signal_noentry;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_single_block_searchlight, getbits(extra_callback_info2, 0, 8)){
@@ -295,6 +309,7 @@ switch(FEAT_SIGNALS, SELF, sw_searchlight, getbits(extra_callback_info2, 16, 8) 
     0x001: sw_double_block_searchlight;
     0x400..0x401: sw_double_path_searchlight;
     0x500..0x501: sw_double_onewaypath_searchlight;
+    0x700..0x701: signal_noentry;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_single_block_colorlight, getbits(extra_callback_info2, 0, 8)){
@@ -338,6 +353,7 @@ switch(FEAT_SIGNALS, SELF, sw_colorlight, getbits(extra_callback_info2, 16, 8) <
     0x001: sw_double_block_colorlight;
     0x400..0x401: sw_double_path_colorlight;
     0x500..0x501: sw_double_onewaypath_colorlight;
+    0x700..0x701: signal_noentry;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_single_block_boposition, getbits(extra_callback_info2, 0, 8)){
@@ -381,6 +397,7 @@ switch(FEAT_SIGNALS, SELF, sw_boposition, getbits(extra_callback_info2, 16, 8) <
     0x001: sw_double_block_boposition;
     0x400..0x401: sw_double_path_boposition;
     0x500..0x501: sw_double_onewaypath_boposition;
+    0x700..0x701: signal_noentry;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_signal_styles, signal_style) {
@@ -425,19 +442,23 @@ if (param_replace_default_graphics) {
         property {
             define_style:       1; // semaphore
             style_name:         string(STR_SIG_SEMAPHORE);
-            style_semaphore_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
+            style_semaphore_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY, SIGNAL_TYPE_NO_ENTRY);
+            enable_no_entry_signals: 1;
 
             define_style:       2; // searchlight
             style_name:         string(STR_SIG_SEARCHLIGHT);
-            style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
+            style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY, SIGNAL_TYPE_NO_ENTRY);
+            enable_no_entry_signals: 1;
             
             define_style:       3; // colorlight
             style_name:         string(STR_SIG_COLORLIGHT);
-            style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
+            style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY, SIGNAL_TYPE_NO_ENTRY);
+            enable_no_entry_signals: 1;
             
             define_style:       4; // b&o color position
             style_name:         string(STR_SIG_BOPOSITION);
-            style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY);
+            style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY, SIGNAL_TYPE_NO_ENTRY);
+            enable_no_entry_signals: 1;
         }
         graphics {
             sw_signal_styles;

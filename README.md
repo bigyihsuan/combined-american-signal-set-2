@@ -13,7 +13,7 @@ A JGRPP-only, unofficial successor to the "Combined Americal Signal Set" by Pikk
   - [x] Block
   - [x] Path
   - [x] One-way Path
-  - [ ] No-entry
+  - [x] No-entry
 - [x] With multi-aspect
 - [x] Parameters
   - [x] Replace default graphics. Default on. If off, use JGRPP styles.
