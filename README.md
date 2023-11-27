@@ -28,6 +28,7 @@ A JGRPP-only, unofficial successor to the "Combined Americal Signal Set" by Pikk
   - [ ] Exit
   - [ ] Combo
 - [ ] Triple-headed signals
+- [ ] More accurate B&O signals (see <https://signals.jovet.net/rules/B%26O%20Signal%20Rules.pdf>)
 
 ## Useful Links
 
