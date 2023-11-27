@@ -63,6 +63,10 @@ A JGRPP-only, unofficial successor to the "Combined Americal Signal Set" by Pikk
 
 - [Source code](https://github.com/bigyihsuan/combined-american-signal-set-2)
 - [BaNaNaS](https://bananas.openttd.org/package/newgrf/42590101)
+- [Forum Thread](https://www.tt-forums.net/viewtopic.php?t=91330)
+
+### Other Links
+
 - [Signal Aspect List](https://docs.google.com/spreadsheets/d/1LJK-9byqPhvQGTWNF2Oebdc0c55675EyVu3RkYG0yH8/edit?usp=sharing)
 - [Original CASS](https://bananas.openttd.org/package/newgrf/44440502)
 - [Original OpenTTD Forum Thread](https://www.tt-forums.net/viewtopic.php?t=24420)
