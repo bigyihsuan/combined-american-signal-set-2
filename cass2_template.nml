@@ -426,8 +426,8 @@ switch (FEAT_SIGNALS, SELF, replaced_signals_electric, param_signal_gui_row_2) {
     3: sw_boposition;
 }
 switch (FEAT_SIGNALS, SELF, replaced_signals, getbits(extra_callback_info2, 8, 8)) {
-    0x0: replaced_signals_electric;
-    0x1: replaced_signals_semaphore;
+    0: replaced_signals_electric;
+    1: replaced_signals_semaphore;
 }
 
 
