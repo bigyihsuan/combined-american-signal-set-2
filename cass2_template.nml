@@ -3,8 +3,8 @@ grf {
     name:                   string(STR_GRF_NAME);
     desc:                   string(STR_GRF_DESCRIPTION);
     url:                    string(STR_GRF_URL);
-    version:                2;
-    min_compatible_version: 0;
+    version:                3;
+    min_compatible_version: 3;
 
     param {
         param_replace_default_graphics {
@@ -160,28 +160,7 @@ template consecutive(signalRow, aspectColumn) {
 
 //!SPRITES!//
 
-spriteset(signal_single_block_boposition_CLR, "gfx/1-and-2-head.png"){aspect(12, 2)}
-spriteset(signal_single_block_boposition_APR, "gfx/1-and-2-head.png"){aspect(12, 1)}
-spriteset(signal_single_block_boposition_STP, "gfx/1-and-2-head.png"){aspect(12, 0)}
-
-spriteset(signal_double_block_boposition_CLR, "gfx/1-and-2-head.png"){aspect(13, 2)}
-spriteset(signal_double_block_boposition_AAL, "gfx/1-and-2-head.png"){aspect(13, 1)}
-spriteset(signal_double_block_boposition_APM, "gfx/1-and-2-head.png"){aspect(13, 1)}
-spriteset(signal_double_block_boposition_AAP, "gfx/1-and-2-head.png"){aspect(13, 1)}
-spriteset(signal_double_block_boposition_APR, "gfx/1-and-2-head.png"){aspect(13, 1)}
-spriteset(signal_double_block_boposition_STP, "gfx/1-and-2-head.png"){aspect(13, 0)}
-
-spriteset(signal_double_path_boposition_CLR, "gfx/1-and-2-head.png"){aspect(13, 2)}
-spriteset(signal_double_path_boposition_MCL, "gfx/1-and-2-head.png"){aspect(13, 1)}
-spriteset(signal_double_path_boposition_APR, "gfx/1-and-2-head.png"){aspect(13, 1)}
-spriteset(signal_double_path_boposition_STP, "gfx/1-and-2-head.png"){aspect(13, 0)}
-
-spriteset(signal_double_onewaypath_boposition_CLR, "gfx/1-and-2-head.png"){aspect(13, 26)}
-spriteset(signal_double_onewaypath_boposition_MCL, "gfx/1-and-2-head.png"){aspect(13, 25)}
-spriteset(signal_double_onewaypath_boposition_APR, "gfx/1-and-2-head.png"){aspect(13, 25)}
-spriteset(signal_double_onewaypath_boposition_STP, "gfx/1-and-2-head.png"){aspect(13, 24)}
-
-spriteset(signal_noentry, "gfx/1-and-2-head.png"){consecutive(14,0)}
+spriteset(signal_noentry, "gfx/1-and-2-head.png"){consecutive(16,0)}
 
 //Switches use the following format:
 //switch(FEAT_SIGNALS, SELF, [name], [variable]{
