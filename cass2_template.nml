@@ -433,6 +433,9 @@ switch (FEAT_SIGNALS, SELF, replaced_signals, getbits(extra_callback_info2, 8, 8
 
 if (param_replace_default_graphics) {
     item (FEAT_SIGNALS, custom_signals, 0) {
+        property {
+            enable_no_entry_signals: 1;
+        }
         graphics {
             replaced_signals;
         }
@@ -442,23 +445,23 @@ if (param_replace_default_graphics) {
         property {
             define_style:       1; // semaphore
             style_name:         string(STR_SIG_SEMAPHORE);
-            style_semaphore_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY, SIGNAL_TYPE_NO_ENTRY);
             enable_no_entry_signals: 1;
+            style_semaphore_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY, SIGNAL_TYPE_NO_ENTRY);
 
             define_style:       2; // searchlight
             style_name:         string(STR_SIG_SEARCHLIGHT);
-            style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY, SIGNAL_TYPE_NO_ENTRY);
             enable_no_entry_signals: 1;
+            style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY, SIGNAL_TYPE_NO_ENTRY);
             
             define_style:       3; // colorlight
             style_name:         string(STR_SIG_COLORLIGHT);
-            style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY, SIGNAL_TYPE_NO_ENTRY);
             enable_no_entry_signals: 1;
+            style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY, SIGNAL_TYPE_NO_ENTRY);
             
             define_style:       4; // b&o color position
             style_name:         string(STR_SIG_BOPOSITION);
-            style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY, SIGNAL_TYPE_NO_ENTRY);
             enable_no_entry_signals: 1;
+            style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY, SIGNAL_TYPE_NO_ENTRY);
         }
         graphics {
             sw_signal_styles;
