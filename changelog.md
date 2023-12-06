@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.1
+
+- Adds the currently-signaled aspect to back-facing sprites.
+
 ## v1 - Initial release
 
 - Included signals:
