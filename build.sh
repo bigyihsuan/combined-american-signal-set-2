@@ -14,8 +14,7 @@ sprites() {
 default() {
 	mkdir -p out
 	sprites
-	# nmlc --nfo=out/cass2.nfo --grf=out/cass2.grf --palette=DOS out/cass2.nml
-	nmlc --palette=DOS --grf=out/cass2.grf out/cass2.nml
+	nmlc --palette=DOS --nfo=out/cass2.nfo --grf=out/cass2.grf out/cass2.nml
 }
 
 install() {
