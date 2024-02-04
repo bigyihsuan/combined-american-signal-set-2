@@ -14,7 +14,7 @@ sprites() {
 default() {
 	mkdir -p out
 	sprites
-	nmlc --palette=DOS --nfo=out/cass2.nfo --grf=out/cass2.grf out/cass2.nml
+	nmlc --custom-tags=./lang/custom_tags.txt --palette=DOS --nfo=out/cass2.nfo --grf=out/cass2.grf out/cass2.nml
 }
 
 install() {
