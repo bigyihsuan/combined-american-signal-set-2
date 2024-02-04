@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.3
+
+- Add gray number plates to double-headed block signals.
+- Add incompatibility error with North American Track Set (4E4D0705) and North American Track Set 2 (4E4D0920).
+
 ## v1.2
 
 - Add double-headed B&O color-position light signals. The double-heads replace the older lights above/below the signal head.
