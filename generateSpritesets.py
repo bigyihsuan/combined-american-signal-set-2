@@ -18,7 +18,6 @@ def main():
                             [f"aspect{tuple(sum(x)for x in zip(o,baseOffsets))}" for o in orientationOffsets])
                     ))
                 print()
-    # B&O color position lights is done manually
 
 
 signalKinds = OrderedDict({
@@ -59,7 +58,7 @@ signalTypes: dict[str, tuple[int, int]] = {
     "semaphore": (0, 0),
     "searchlight": (4, 0),
     "colorlight": (8, 0),
-    # "boposition": (12, 0)
+    "boposition": (12, 0)
 }
 
 TEMPLATE = """spriteset(signal_{head}_{signalVariant}_{signalType}_{aspect}, "gfx/1-and-2-head.png"){{{southwestOffset}}}"""

@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.2
+
+- Add double-headed B&O color-position light signals. The double-heads replace the older lights above/below the signal head.
+
 ## v1.1
 
 - Adds the currently-signaled aspect to back-facing sprites.
