@@ -24,6 +24,10 @@ install() {
 	fi
 }
 
+clear() {
+	rm "$NGRF_DIR/cass2.grf"
+}
+
 bundle() {
 	rm cass2.tar
 	rm -r dist
@@ -49,6 +53,8 @@ elif [[ "$1" = "install" ]]; then
 	install
 elif [[ "$1" = "bundle" ]]; then
 	bundle
+elif [[ "$1" = "clear" ]]; then
+	clear
 else
 	echo $USAGE
 	exit $BAD_ARGS

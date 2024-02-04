@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.3.1
+
+- HOTFIX: fix no-entry signals being B&O color position light signals.
+
 ## v1.3
 
 - Add gray number plates to double-headed block signals.
