@@ -1,6 +1,9 @@
 from collections import OrderedDict
 
 
+ONEWAY_PATH_OFFSET = 24
+DOUBLE_BLOCK_OFFSET = 48
+
 def main():
     for signalType, baseOffsets in signalTypes.items():
         for signalVariant, data in signalKinds.items():
@@ -26,12 +29,12 @@ signalKinds = OrderedDict({
             "STP": [(0, 0)],
         },
         "double": {
-            "CLR": [(1, 2), (1, 0)],
-            "AAL": [(1, 1)],
-            "APM": [(2, 1)],
-            "AAP": [(2, 2)],
-            "APR": [(2, 0)],
-            "STP": [(3, 0)],
+            "CLR": [(1, 2+DOUBLE_BLOCK_OFFSET), (1, 0+DOUBLE_BLOCK_OFFSET)],
+            "AAL": [(1, 1+DOUBLE_BLOCK_OFFSET)],
+            "APM": [(2, 1+DOUBLE_BLOCK_OFFSET)],
+            "AAP": [(2, 2+DOUBLE_BLOCK_OFFSET)],
+            "APR": [(2, 0+DOUBLE_BLOCK_OFFSET)],
+            "STP": [(3, 0+DOUBLE_BLOCK_OFFSET)],
         },
     }),
     "path": OrderedDict({
@@ -44,10 +47,10 @@ signalKinds = OrderedDict({
     }),
     "onewaypath": OrderedDict({
         "double": {
-            "CLR": [(1, 26), (1, 24)],
-            "MCL": [(3, 26)],
-            "APR": [(2, 24)],
-            "STP": [(3, 24)],
+            "CLR": [(1, 2+ONEWAY_PATH_OFFSET), (1, 0+ONEWAY_PATH_OFFSET)],
+            "MCL": [(3, 2+ONEWAY_PATH_OFFSET)],
+            "APR": [(2, 0+ONEWAY_PATH_OFFSET)],
+            "STP": [(3, 0+ONEWAY_PATH_OFFSET)],
         }
     }),
 })

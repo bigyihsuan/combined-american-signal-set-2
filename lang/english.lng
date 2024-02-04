@@ -17,7 +17,7 @@ STR_PARAM_REPLACE_DEFAULT_NAME :Replace default graphics
 STR_PARAM_REPLACE_DEFAULT_DESC :Replace the default signal graphics with CASS2 graphics. If off, the JGRPP signal style selector will be used.{}Default on.
 
 STR_PARAM_USE_DOUBLE_BLOCK_NAME :Use double-headed block signals
-STR_PARAM_USE_DOUBLE_BLOCK_DESC :Use double-headed block signals instead of single-headed block signals. Note that there is no visual difference between double-headed block and path signals.{}Default off.
+STR_PARAM_USE_DOUBLE_BLOCK_DESC :Use double-headed block signals instead of single-headed block signals.{}Default off.
 
 STR_PARAM_SIGNAL_ROW_1_NAME :Signal style for signal GUI top row
 STR_PARAM_SIGNAL_ROW_1_DESC :The selected signal style for the top row of the signal GUI. Requires "Replace default graphics" to be on.{}Default "semaphore".
