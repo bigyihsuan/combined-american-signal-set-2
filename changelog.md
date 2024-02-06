@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.3.2
+
+- HOTFIX: fix double-headed block signals being 1 pixel too far to the right.
+
 ## v1.3.1
 
 - HOTFIX: fix no-entry signals being B&O color position light signals.

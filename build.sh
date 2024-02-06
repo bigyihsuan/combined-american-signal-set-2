@@ -24,7 +24,7 @@ install() {
 	fi
 }
 
-clear() {
+clean() {
 	rm "$NGRF_DIR/cass2.grf"
 }
 
@@ -53,8 +53,8 @@ elif [[ "$1" = "install" ]]; then
 	install
 elif [[ "$1" = "bundle" ]]; then
 	bundle
-elif [[ "$1" = "clear" ]]; then
-	clear
+elif [[ "$1" = "clean" ]]; then
+	clean
 else
 	echo $USAGE
 	exit $BAD_ARGS
