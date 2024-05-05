@@ -5,16 +5,16 @@ USAGE="usage: ./build.sh (default | install | bundle)"
 BAD_ARGS=85
 
 sprites() {
-	python3 generateSpritesets.py | sed '/^\/\/!SPRITES!\/\//{
+	python3 src/generateSpritesets.py | sed '/^\/\/!SPRITES!\/\//{
 		r /dev/stdin
 		d
-		}' cass2_template.nml > out/cass2.nml
+		}' src/cass2_template.nml > out/cass2.nml
 }
 
 default() {
 	mkdir -p out
 	sprites
-	nmlc --custom-tags=./lang/custom_tags.txt --palette=DOS --nfo=out/cass2.nfo --grf=out/cass2.grf out/cass2.nml
+	nmlc --custom-tags=lang/custom_tags.txt --palette=DOS --nfo=out/cass2.nfo --grf=out/cass2.grf out/cass2.nml
 }
 
 install() {
