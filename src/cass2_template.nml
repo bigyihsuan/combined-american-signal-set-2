@@ -3,7 +3,7 @@ grf {
     name:                   string(STR_GRF_NAME);
     desc:                   string(STR_GRF_DESCRIPTION);
     url:                    string(STR_GRF_URL);
-    version:                5;
+    version:                6;
     min_compatible_version: 0;
 
     param {
@@ -11,7 +11,7 @@ grf {
             type: bool;
             name: string(STR_PARAM_REPLACE_DEFAULT_NAME);
             desc: string(STR_PARAM_REPLACE_DEFAULT_DESC);
-            def_value: 1;
+            def_value: 0;
         }
     }
     param {
@@ -56,8 +56,8 @@ grf {
     }
 }
 
-if (grf_future_status("\4E\4D\07\05")) { error(FATAL, string(STR_ERROR_INCOMPATIBLE_SET, "North American Track Set")); }
-if (grf_future_status("\4E\4D\09\20")) { error(FATAL, string(STR_ERROR_INCOMPATIBLE_SET, "North American Track Set 2")); }
+// if (grf_future_status("\4E\4D\07\05")) { error(FATAL, string(STR_ERROR_INCOMPATIBLE_SET, "North American Track Set")); }
+// if (grf_future_status("\4E\4D\09\20")) { error(FATAL, string(STR_ERROR_INCOMPATIBLE_SET, "North American Track Set 2")); }
 
 if (!extended_feature_test("action3_signals_custom_signal_sprites")) {
     error(FATAL, string(STR_ERROR_UNSUPPORTED_VERSION));

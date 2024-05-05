@@ -51,6 +51,7 @@ A JGRPP-only, unofficial successor to the "Combined Americal Signal Set" by Pikk
 
 ### Post-v1
 
+- [x] Double-headed signals
 - [ ] Vanilla OpenTTD signals
   - [ ] Entry
   - [ ] Exit

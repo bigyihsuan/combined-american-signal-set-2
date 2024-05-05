@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.3.3
+
+- Remove incompatibility with North American Track Set and North American Track Set 2. Note that for both GRFs, the "custom signals" parameter should be set to off.
+
 ## v1.3.2
 
 - HOTFIX: fix double-headed block signals being 1 pixel too far to the right.
