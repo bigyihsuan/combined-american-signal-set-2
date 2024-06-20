@@ -163,7 +163,7 @@ template consecutive(signalRow, aspectColumn) {
 
 //!SPRITES!//
 
-spriteset(signal_noentry, "gfx/1-and-2-head.png"){consecutive(16,0)}
+spriteset(signal_noentry, "src/img/oneway/oneway.png"){consecutive(0,0)}
 
 //Switches use the following format:
 //switch(FEAT_SIGNALS, SELF, [name], [variable]{

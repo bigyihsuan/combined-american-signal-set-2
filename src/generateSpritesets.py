@@ -4,6 +4,7 @@ from collections import OrderedDict
 ONEWAY_PATH_OFFSET = 24
 DOUBLE_BLOCK_OFFSET = 48
 
+
 def main():
     for signalType, baseOffsets in signalTypes.items():
         for signalVariant, data in signalKinds.items():
@@ -15,7 +16,8 @@ def main():
                         signalType=signalType,
                         aspect=aspect,
                         southwestOffset=" ".join(
-                            [f"aspect{tuple(sum(x)for x in zip(o,baseOffsets))}" for o in orientationOffsets])
+                            [f"aspect{tuple(sum(x)for x in zip(o,baseOffsets))}" for o in orientationOffsets]),
+                        name=signalNames[signalType]
                     ))
                 print()
 
@@ -56,11 +58,18 @@ signalKinds = OrderedDict({
 
 signalTypes: dict[str, tuple[int, int]] = {
     "semaphore": (0, 0),
-    "searchlight": (4, 0),
-    "colorlight": (8, 0),
-    "boposition": (12, 0)
+    "searchlight": (0, 0),
+    "colorlight": (0, 0),
+    "boposition": (0, 0)
 }
 
-TEMPLATE = """spriteset(signal_{head}_{signalVariant}_{signalType}_{aspect}, "gfx/1-and-2-head.png"){{{southwestOffset}}}"""
+signalNames: dict[str, str] = {
+    "semaphore": "sema",
+    "searchlight": "search",
+    "colorlight": "color",
+    "boposition": "bo",
+}
+
+TEMPLATE = """spriteset(signal_{head}_{signalVariant}_{signalType}_{aspect}, "src/img/{name}/{name}.png"){{{southwestOffset}}}"""
 
 main()

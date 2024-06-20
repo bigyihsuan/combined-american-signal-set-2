@@ -25,7 +25,7 @@ install() {
 }
 
 clean() {
-	rm "$NGRF_DIR/cass2.grf"
+	rm -f "$NGRF_DIR/cass2.grf"
 }
 
 bundle() {
