@@ -1,2 +1,0 @@
-north american track set 1 = 4E4D0705
-north american track set 2 = 4E4D0920
