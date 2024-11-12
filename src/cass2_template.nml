@@ -204,9 +204,18 @@ spriteset(signal_noentry, "src/img/oneway/oneway.png"){consecutive(0,0)}
 //  06: programmable;
 //  07: no entry;
 //}
-//(getbits(extra_callback_info2, 16, 8)
 
-switch(FEAT_SIGNALS, SELF, sw_single_block_semaphore, getbits(extra_callback_info2, 0, 8)){
+switch(FEAT_SIGNALS, SELF, SIGNAL_ASPECT, getbits(extra_callback_info2, 0, 8)){
+    return;
+}
+switch(FEAT_SIGNALS, SELF, SIGNAL_VARIANT, getbits(extra_callback_info2, 8, 8)){
+    return;
+}
+switch(FEAT_SIGNALS, SELF, SIGNAL_TYPE, getbits(extra_callback_info2, 16, 8)){
+    return;
+}
+
+switch(FEAT_SIGNALS, SELF, sw_single_block_semaphore, SIGNAL_ASPECT()){
     00: signal_single_block_semaphore_STP;
     01: signal_single_block_semaphore_CLR;
     05: signal_single_block_semaphore_CLR;
@@ -215,7 +224,7 @@ switch(FEAT_SIGNALS, SELF, sw_single_block_semaphore, getbits(extra_callback_inf
     02: signal_single_block_semaphore_APR;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_double_block_semaphore, getbits(extra_callback_info2, 0, 8)){
+switch(FEAT_SIGNALS, SELF, sw_double_block_semaphore, SIGNAL_ASPECT()){
     00: signal_double_block_semaphore_STP;
     01: signal_double_block_semaphore_CLR;
     05: signal_double_block_semaphore_AAL;
@@ -224,7 +233,7 @@ switch(FEAT_SIGNALS, SELF, sw_double_block_semaphore, getbits(extra_callback_inf
     02: signal_double_block_semaphore_APR;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_double_path_semaphore, getbits(extra_callback_info2, 0, 8)){
+switch(FEAT_SIGNALS, SELF, sw_double_path_semaphore, SIGNAL_ASPECT()){
     00: signal_double_path_semaphore_STP;
     01: signal_double_path_semaphore_CLR;
     05: signal_double_path_semaphore_CLR;
@@ -233,7 +242,7 @@ switch(FEAT_SIGNALS, SELF, sw_double_path_semaphore, getbits(extra_callback_info
     02: signal_double_path_semaphore_APR;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_semaphore, getbits(extra_callback_info2, 0, 8)){
+switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_semaphore, SIGNAL_ASPECT()){
     00: signal_double_onewaypath_semaphore_STP;
     01: signal_double_onewaypath_semaphore_CLR;
     05: signal_double_onewaypath_semaphore_CLR;
@@ -242,7 +251,7 @@ switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_semaphore, getbits(extra_callbac
     02: signal_double_onewaypath_semaphore_APR;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_semaphore, getbits(extra_callback_info2, 16, 8) << 8 | param_use_double_headed_block){
+switch(FEAT_SIGNALS, SELF, sw_semaphore, SIGNAL_TYPE() << 8 | param_use_double_headed_block){
     0x000: sw_single_block_semaphore;
     0x001: sw_double_block_semaphore;
     0x400..0x401: sw_double_path_semaphore;
@@ -250,7 +259,7 @@ switch(FEAT_SIGNALS, SELF, sw_semaphore, getbits(extra_callback_info2, 16, 8) <<
     0x700..0x701: signal_noentry;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_single_block_searchlight, getbits(extra_callback_info2, 0, 8)){
+switch(FEAT_SIGNALS, SELF, sw_single_block_searchlight, SIGNAL_ASPECT()){
     00: signal_single_block_searchlight_STP;
     01: signal_single_block_searchlight_CLR;
     05: signal_single_block_searchlight_CLR;
@@ -259,7 +268,7 @@ switch(FEAT_SIGNALS, SELF, sw_single_block_searchlight, getbits(extra_callback_i
     02: signal_single_block_searchlight_APR;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_double_block_searchlight, getbits(extra_callback_info2, 0, 8)){
+switch(FEAT_SIGNALS, SELF, sw_double_block_searchlight, SIGNAL_ASPECT()){
     00: signal_double_block_searchlight_STP;
     01: signal_double_block_searchlight_CLR;
     05: signal_double_block_searchlight_AAL;
@@ -268,7 +277,7 @@ switch(FEAT_SIGNALS, SELF, sw_double_block_searchlight, getbits(extra_callback_i
     02: signal_double_block_searchlight_APR;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_double_path_searchlight, getbits(extra_callback_info2, 0, 8)){
+switch(FEAT_SIGNALS, SELF, sw_double_path_searchlight, SIGNAL_ASPECT()){
     00: signal_double_path_searchlight_STP;
     01: signal_double_path_searchlight_CLR;
     05: signal_double_path_searchlight_CLR;
@@ -277,7 +286,7 @@ switch(FEAT_SIGNALS, SELF, sw_double_path_searchlight, getbits(extra_callback_in
     02: signal_double_path_searchlight_APR;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_searchlight, getbits(extra_callback_info2, 0, 8)){
+switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_searchlight, SIGNAL_ASPECT()){
     00: signal_double_onewaypath_searchlight_STP;
     01: signal_double_onewaypath_searchlight_CLR;
     05: signal_double_onewaypath_searchlight_CLR;
@@ -286,7 +295,7 @@ switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_searchlight, getbits(extra_callb
     02: signal_double_onewaypath_searchlight_APR;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_searchlight, getbits(extra_callback_info2, 16, 8) << 8 | param_use_double_headed_block){
+switch(FEAT_SIGNALS, SELF, sw_searchlight, SIGNAL_TYPE() << 8 | param_use_double_headed_block){
     0x000: sw_single_block_searchlight;
     0x001: sw_double_block_searchlight;
     0x400..0x401: sw_double_path_searchlight;
@@ -294,7 +303,7 @@ switch(FEAT_SIGNALS, SELF, sw_searchlight, getbits(extra_callback_info2, 16, 8) 
     0x700..0x701: signal_noentry;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_single_block_colorlight, getbits(extra_callback_info2, 0, 8)){
+switch(FEAT_SIGNALS, SELF, sw_single_block_colorlight, SIGNAL_ASPECT()){
     00: signal_single_block_colorlight_STP;
     01: signal_single_block_colorlight_CLR;
     05: signal_single_block_colorlight_CLR;
@@ -303,7 +312,7 @@ switch(FEAT_SIGNALS, SELF, sw_single_block_colorlight, getbits(extra_callback_in
     02: signal_single_block_colorlight_APR;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_double_block_colorlight, getbits(extra_callback_info2, 0, 8)){
+switch(FEAT_SIGNALS, SELF, sw_double_block_colorlight, SIGNAL_ASPECT()){
     00: signal_double_block_colorlight_STP;
     01: signal_double_block_colorlight_CLR;
     05: signal_double_block_colorlight_AAL;
@@ -312,7 +321,7 @@ switch(FEAT_SIGNALS, SELF, sw_double_block_colorlight, getbits(extra_callback_in
     02: signal_double_block_colorlight_APR;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_double_path_colorlight, getbits(extra_callback_info2, 0, 8)){
+switch(FEAT_SIGNALS, SELF, sw_double_path_colorlight, SIGNAL_ASPECT()){
     00: signal_double_path_colorlight_STP;
     01: signal_double_path_colorlight_CLR;
     05: signal_double_path_colorlight_CLR;
@@ -321,7 +330,7 @@ switch(FEAT_SIGNALS, SELF, sw_double_path_colorlight, getbits(extra_callback_inf
     02: signal_double_path_colorlight_APR;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_colorlight, getbits(extra_callback_info2, 0, 8)){
+switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_colorlight, SIGNAL_ASPECT()){
     00: signal_double_onewaypath_colorlight_STP;
     01: signal_double_onewaypath_colorlight_CLR;
     05: signal_double_onewaypath_colorlight_CLR;
@@ -330,7 +339,7 @@ switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_colorlight, getbits(extra_callba
     02: signal_double_onewaypath_colorlight_APR;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_colorlight, getbits(extra_callback_info2, 16, 8) << 8 | param_use_double_headed_block){
+switch(FEAT_SIGNALS, SELF, sw_colorlight, SIGNAL_TYPE() << 8 | param_use_double_headed_block){
     0x000: sw_single_block_colorlight;
     0x001: sw_double_block_colorlight;
     0x400..0x401: sw_double_path_colorlight;
@@ -338,7 +347,7 @@ switch(FEAT_SIGNALS, SELF, sw_colorlight, getbits(extra_callback_info2, 16, 8) <
     0x700..0x701: signal_noentry;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_single_block_boposition, getbits(extra_callback_info2, 0, 8)){
+switch(FEAT_SIGNALS, SELF, sw_single_block_boposition, SIGNAL_ASPECT()){
     00: signal_single_block_boposition_STP;
     01: signal_single_block_boposition_CLR;
     05: signal_single_block_boposition_CLR;
@@ -347,7 +356,7 @@ switch(FEAT_SIGNALS, SELF, sw_single_block_boposition, getbits(extra_callback_in
     02: signal_single_block_boposition_APR;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_double_block_boposition, getbits(extra_callback_info2, 0, 8)){
+switch(FEAT_SIGNALS, SELF, sw_double_block_boposition, SIGNAL_ASPECT()){
     00: signal_double_block_boposition_STP;
     01: signal_double_block_boposition_CLR;
     05: signal_double_block_boposition_AAL;
@@ -356,7 +365,7 @@ switch(FEAT_SIGNALS, SELF, sw_double_block_boposition, getbits(extra_callback_in
     02: signal_double_block_boposition_APR;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_double_path_boposition, getbits(extra_callback_info2, 0, 8)){
+switch(FEAT_SIGNALS, SELF, sw_double_path_boposition, SIGNAL_ASPECT()){
     00: signal_double_path_boposition_STP;
     01: signal_double_path_boposition_CLR;
     05: signal_double_path_boposition_CLR;
@@ -365,7 +374,7 @@ switch(FEAT_SIGNALS, SELF, sw_double_path_boposition, getbits(extra_callback_inf
     02: signal_double_path_boposition_APR;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_boposition, getbits(extra_callback_info2, 0, 8)){
+switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_boposition, SIGNAL_ASPECT()){
     00: signal_double_onewaypath_boposition_STP;
     01: signal_double_onewaypath_boposition_CLR;
     05: signal_double_onewaypath_boposition_CLR;
@@ -374,7 +383,7 @@ switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_boposition, getbits(extra_callba
     02: signal_double_onewaypath_boposition_APR;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_boposition, getbits(extra_callback_info2, 16, 8) << 8 | param_use_double_headed_block){
+switch(FEAT_SIGNALS, SELF, sw_boposition, SIGNAL_TYPE() << 8 | param_use_double_headed_block){
     0x000: sw_single_block_boposition;
     0x001: sw_double_block_boposition;
     0x400..0x401: sw_double_path_boposition;
@@ -407,7 +416,7 @@ switch (FEAT_SIGNALS, SELF, replaced_signals_electric, param_signal_gui_row_2) {
     2: sw_colorlight;
     3: sw_boposition;
 }
-switch (FEAT_SIGNALS, SELF, replaced_signals, getbits(extra_callback_info2, 8, 8)) {
+switch (FEAT_SIGNALS, SELF, replaced_signals, SIGNAL_VARIANT()) {
     0: replaced_signals_electric;
     1: replaced_signals_semaphore;
 }
