@@ -216,39 +216,39 @@ switch(FEAT_SIGNALS, SELF, SIGNAL_TYPE, getbits(extra_callback_info2, 16, 8)){
 }
 
 switch(FEAT_SIGNALS, SELF, sw_single_block_semaphore, SIGNAL_ASPECT()){
-    00: signal_single_block_semaphore_STP;
     01: signal_single_block_semaphore_CLR;
     05: signal_single_block_semaphore_CLR;
     04: signal_single_block_semaphore_CLR;
     03: signal_single_block_semaphore_CLR;
     02: signal_single_block_semaphore_APR;
+    00: signal_single_block_semaphore_STP;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_double_block_semaphore, SIGNAL_ASPECT()){
-    00: signal_double_block_semaphore_STP;
     01: signal_double_block_semaphore_CLR;
     05: signal_double_block_semaphore_AAL;
     04: signal_double_block_semaphore_APM;
     03: signal_double_block_semaphore_AAP;
     02: signal_double_block_semaphore_APR;
+    00: signal_double_block_semaphore_STP;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_double_path_semaphore, SIGNAL_ASPECT()){
-    00: signal_double_path_semaphore_STP;
     01: signal_double_path_semaphore_CLR;
     05: signal_double_path_semaphore_CLR;
     04: signal_double_path_semaphore_CLR;
     03: signal_double_path_semaphore_MCL;
     02: signal_double_path_semaphore_APR;
+    00: signal_double_path_semaphore_STP;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_semaphore, SIGNAL_ASPECT()){
-    00: signal_double_onewaypath_semaphore_STP;
     01: signal_double_onewaypath_semaphore_CLR;
     05: signal_double_onewaypath_semaphore_CLR;
     04: signal_double_onewaypath_semaphore_CLR;
     03: signal_double_onewaypath_semaphore_MCL;
     02: signal_double_onewaypath_semaphore_APR;
+    00: signal_double_onewaypath_semaphore_STP;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_semaphore, SIGNAL_TYPE() << 8 | param_use_double_headed_block){
@@ -260,39 +260,39 @@ switch(FEAT_SIGNALS, SELF, sw_semaphore, SIGNAL_TYPE() << 8 | param_use_double_h
 }
 
 switch(FEAT_SIGNALS, SELF, sw_single_block_searchlight, SIGNAL_ASPECT()){
-    00: signal_single_block_searchlight_STP;
     01: signal_single_block_searchlight_CLR;
     05: signal_single_block_searchlight_CLR;
     04: signal_single_block_searchlight_CLR;
     03: signal_single_block_searchlight_CLR;
     02: signal_single_block_searchlight_APR;
+    00: signal_single_block_searchlight_STP;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_double_block_searchlight, SIGNAL_ASPECT()){
-    00: signal_double_block_searchlight_STP;
     01: signal_double_block_searchlight_CLR;
     05: signal_double_block_searchlight_AAL;
     04: signal_double_block_searchlight_APM;
     03: signal_double_block_searchlight_AAP;
     02: signal_double_block_searchlight_APR;
+    00: signal_double_block_searchlight_STP;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_double_path_searchlight, SIGNAL_ASPECT()){
-    00: signal_double_path_searchlight_STP;
     01: signal_double_path_searchlight_CLR;
     05: signal_double_path_searchlight_CLR;
     04: signal_double_path_searchlight_CLR;
     03: signal_double_path_searchlight_MCL;
     02: signal_double_path_searchlight_APR;
+    00: signal_double_path_searchlight_STP;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_searchlight, SIGNAL_ASPECT()){
-    00: signal_double_onewaypath_searchlight_STP;
     01: signal_double_onewaypath_searchlight_CLR;
     05: signal_double_onewaypath_searchlight_CLR;
     04: signal_double_onewaypath_searchlight_CLR;
     03: signal_double_onewaypath_searchlight_MCL;
     02: signal_double_onewaypath_searchlight_APR;
+    00: signal_double_onewaypath_searchlight_STP;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_searchlight, SIGNAL_TYPE() << 8 | param_use_double_headed_block){
@@ -304,39 +304,39 @@ switch(FEAT_SIGNALS, SELF, sw_searchlight, SIGNAL_TYPE() << 8 | param_use_double
 }
 
 switch(FEAT_SIGNALS, SELF, sw_single_block_colorlight, SIGNAL_ASPECT()){
-    00: signal_single_block_colorlight_STP;
     01: signal_single_block_colorlight_CLR;
     05: signal_single_block_colorlight_CLR;
     04: signal_single_block_colorlight_CLR;
     03: signal_single_block_colorlight_CLR;
     02: signal_single_block_colorlight_APR;
+    00: signal_single_block_colorlight_STP;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_double_block_colorlight, SIGNAL_ASPECT()){
-    00: signal_double_block_colorlight_STP;
     01: signal_double_block_colorlight_CLR;
     05: signal_double_block_colorlight_AAL;
     04: signal_double_block_colorlight_APM;
     03: signal_double_block_colorlight_AAP;
     02: signal_double_block_colorlight_APR;
+    00: signal_double_block_colorlight_STP;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_double_path_colorlight, SIGNAL_ASPECT()){
-    00: signal_double_path_colorlight_STP;
     01: signal_double_path_colorlight_CLR;
     05: signal_double_path_colorlight_CLR;
     04: signal_double_path_colorlight_CLR;
     03: signal_double_path_colorlight_MCL;
     02: signal_double_path_colorlight_APR;
+    00: signal_double_path_colorlight_STP;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_colorlight, SIGNAL_ASPECT()){
-    00: signal_double_onewaypath_colorlight_STP;
     01: signal_double_onewaypath_colorlight_CLR;
     05: signal_double_onewaypath_colorlight_CLR;
     04: signal_double_onewaypath_colorlight_CLR;
     03: signal_double_onewaypath_colorlight_MCL;
     02: signal_double_onewaypath_colorlight_APR;
+    00: signal_double_onewaypath_colorlight_STP;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_colorlight, SIGNAL_TYPE() << 8 | param_use_double_headed_block){
@@ -348,39 +348,39 @@ switch(FEAT_SIGNALS, SELF, sw_colorlight, SIGNAL_TYPE() << 8 | param_use_double_
 }
 
 switch(FEAT_SIGNALS, SELF, sw_single_block_boposition, SIGNAL_ASPECT()){
-    00: signal_single_block_boposition_STP;
     01: signal_single_block_boposition_CLR;
     05: signal_single_block_boposition_CLR;
     04: signal_single_block_boposition_CLR;
     03: signal_single_block_boposition_CLR;
     02: signal_single_block_boposition_APR;
+    00: signal_single_block_boposition_STP;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_double_block_boposition, SIGNAL_ASPECT()){
-    00: signal_double_block_boposition_STP;
     01: signal_double_block_boposition_CLR;
     05: signal_double_block_boposition_AAL;
     04: signal_double_block_boposition_APM;
     03: signal_double_block_boposition_AAP;
     02: signal_double_block_boposition_APR;
+    00: signal_double_block_boposition_STP;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_double_path_boposition, SIGNAL_ASPECT()){
-    00: signal_double_path_boposition_STP;
     01: signal_double_path_boposition_CLR;
     05: signal_double_path_boposition_CLR;
     04: signal_double_path_boposition_CLR;
     03: signal_double_path_boposition_MCL;
     02: signal_double_path_boposition_APR;
+    00: signal_double_path_boposition_STP;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_boposition, SIGNAL_ASPECT()){
-    00: signal_double_onewaypath_boposition_STP;
     01: signal_double_onewaypath_boposition_CLR;
     05: signal_double_onewaypath_boposition_CLR;
     04: signal_double_onewaypath_boposition_CLR;
     03: signal_double_onewaypath_boposition_MCL;
     02: signal_double_onewaypath_boposition_APR;
+    00: signal_double_onewaypath_boposition_STP;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_boposition, SIGNAL_TYPE() << 8 | param_use_double_headed_block){
