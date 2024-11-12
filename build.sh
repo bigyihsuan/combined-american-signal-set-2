@@ -1,43 +1,75 @@
 #!/bin/bash
 
-NGRF_DIR=/mnt/c/Users/bigyi/OneDrive/Documents/OpenTTD/newgrf/
-USAGE="usage: ./build.sh (default | install | bundle)"
+set -e
+
+NGRF_DIRS=(/mnt/c/Users/bigyi/Documents/OpenTTD/newgrf /mnt/c/Users/bigyi/OneDrive/Documents/OpenTTD/newgrf)
+USAGE="usage: ./build.sh (default | install | bundle | sprites | compile | clean)"
 BAD_ARGS=85
+GRF_PATH=./dist/cass2.grf
+
+LINE() {
+	echo "--------"
+}
+
+default() {
+	clean
+	compile
+	bundle
+	install
+}
 
 sprites() {
+	echo "Generating sprites..."
 	python3 src/generateSpritesets.py | sed '/^\/\/!SPRITES!\/\//{
 		r /dev/stdin
 		d
 		}' src/cass2_template.nml > out/cass2.nml
+	echo "Sprites generated."
 }
 
-default() {
-	mkdir -p out
+compile() {
+	echo "Compiling GRF..."
+	mkdir -v -p out
 	sprites
-	nmlc --custom-tags=lang/custom_tags.txt --palette=DOS --nfo=out/cass2.nfo --grf=out/cass2.grf out/cass2.nml
-}
-
-install() {
-	default
-	if [[ -e "./out/cass2.grf" ]]; then
-		cp ./out/cass2.grf $NGRF_DIR
-	fi
-}
-
-clean() {
-	rm -f "$NGRF_DIR/cass2.grf"
+	./nml/nmlc --custom-tags=lang/custom_tags.txt --palette=DOS --nfo=out/cass2.nfo --grf=out/cass2.grf out/cass2.nml
+	echo "Compiling GRF complete."
+	LINE
 }
 
 bundle() {
-	rm cass2.tar
-	rm -r dist
-	mkdir -p dist
-	default
-	cp out/cass2.grf dist
-	cp README.md dist/readme.txt
-	cp LICENSE dist/license.txt
-	cp changelog.md dist/changelog.txt
+	echo "Bundling GRF..."
+	rm -v cass2.tar
+	rm -v -r dist
+	mkdir -v -p dist
+	cp -v out/cass2.grf dist
+	cp -v README.md dist/readme.txt
+	cp -v LICENSE dist/license.txt
+	cp -v changelog.md dist/changelog.txt
 	tar cvf cass2.tar dist
+	echo "GRF bundled."
+	LINE
+}
+
+install() {
+    echo "Installing GRF..."
+    if [[ -e $GRF_PATH ]]; then
+		for dir in "${NGRF_DIRS[@]}"; do
+			cp -v $GRF_PATH $dir
+		done
+		echo "Successfully installed."
+	else
+		echo "GRF path '$GRF_PATH' does not exist."
+	fi
+	LINE
+}
+
+clean() {
+    echo "Cleaning installation dir..."
+	for dir in "${NGRF_DIRS[@]}"; do
+		[ -e "$dir/cass2.grf" ] && rm -v "$dir/cass2.grf"
+	done
+	echo "Cleaning complete."
+	LINE
 }
 
 if [[ "$#" -eq 0 ]]; then
@@ -53,6 +85,8 @@ elif [[ "$1" = "install" ]]; then
 	install
 elif [[ "$1" = "bundle" ]]; then
 	bundle
+elif [[ "$1" = "compile" ]]; then
+	compile
 elif [[ "$1" = "clean" ]]; then
 	clean
 else
