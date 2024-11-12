@@ -54,6 +54,22 @@ grf {
             };
         }
     }
+    param {
+        param_uniform_signal_graphics {
+            type: int;
+            name: string(STR_PARAM_UNIFORM_SIGNALS_NAME);
+            desc: string(STR_PARAM_UNIFORM_SIGNALS_DESC);
+            def_value: 0;
+            min_value: 0;
+            max_value: 3;
+            names: {
+                0: string(STR_PARAM_UNIFORM_SIGNALS_VALUE_OFF);
+                1: string(STR_PARAM_UNIFORM_SIGNALS_VALUE_BLOCK);
+                2: string(STR_PARAM_UNIFORM_SIGNALS_VALUE_TWOWAY_PATH);
+                3: string(STR_PARAM_UNIFORM_SIGNALS_VALUE_ONEWAY_PATH);
+            };
+        }
+    }
 }
 
 // if (grf_future_status("\4E\4D\07\05")) { error(FATAL, string(STR_ERROR_INCOMPATIBLE_SET, "North American Track Set")); }
@@ -85,7 +101,7 @@ if (!extended_feature_test("action3_signals_custom_signal_sprites")) {
 // for 2 aspect block signals:
 // CLEAR  clear
 // ADVANCED_APPROACH_LIMITED  advanced approach limited
-// APPROACH_LIMITED  approach medium
+// APPROACH_MEDIUM  approach medium
 // ADVANCED_APPROACH  advanced approach
 // APPROACH  approach
 // STOP  stop
@@ -99,7 +115,7 @@ if (!extended_feature_test("action3_signals_custom_signal_sprites")) {
 // for 3 aspect block signals:
 // CLEAR  clear
 // ADVANCED_APPROACH_LIMITED  advanced approach limited
-// APPROACH_LIMITED  approach medium
+// APPROACH_MEDIUM  approach medium
 // APPROACH_SLOW  approach slow
 // APPROACH  approach
 // STOP  stop
@@ -227,7 +243,7 @@ switch(FEAT_SIGNALS, SELF, sw_single_block_semaphore, SIGNAL_ASPECT()){
 switch(FEAT_SIGNALS, SELF, sw_double_block_semaphore, SIGNAL_ASPECT()){
     01: signal_double_block_semaphore_CLEAR;
     05: signal_double_block_semaphore_ADVANCED_APPROACH_LIMITED;
-    04: signal_double_block_semaphore_APPROACH_LIMITED;
+    04: signal_double_block_semaphore_APPROACH_MEDIUM;
     03: signal_double_block_semaphore_ADVANCED_APPROACH;
     02: signal_double_block_semaphore_APPROACH;
     00: signal_double_block_semaphore_STOP;
@@ -251,12 +267,18 @@ switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_semaphore, SIGNAL_ASPECT()){
     00: signal_double_onewaypath_semaphore_STOP;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_semaphore, SIGNAL_TYPE() << 8 | param_use_double_headed_block){
+switch(FEAT_SIGNALS, SELF, sw_semaphore, param_uniform_signal_graphics << 16 | SIGNAL_TYPE() << 8 | param_use_double_headed_block){
     0x000: sw_single_block_semaphore;
     0x001: sw_double_block_semaphore;
     0x400..0x401: sw_double_path_semaphore;
     0x500..0x501: sw_double_onewaypath_semaphore;
     0x700..0x701: signal_noentry;
+    0x10000..0x10501: sw_double_block_semaphore;
+    0x10700..0x10701: signal_noentry;
+    0x20000..0x20501: sw_double_path_semaphore;
+    0x20700..0x20701: signal_noentry;
+    0x30000..0x30501: sw_double_onewaypath_semaphore;
+    0x30700..0x30701: signal_noentry;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_single_block_searchlight, SIGNAL_ASPECT()){
@@ -271,7 +293,7 @@ switch(FEAT_SIGNALS, SELF, sw_single_block_searchlight, SIGNAL_ASPECT()){
 switch(FEAT_SIGNALS, SELF, sw_double_block_searchlight, SIGNAL_ASPECT()){
     01: signal_double_block_searchlight_CLEAR;
     05: signal_double_block_searchlight_ADVANCED_APPROACH_LIMITED;
-    04: signal_double_block_searchlight_APPROACH_LIMITED;
+    04: signal_double_block_searchlight_APPROACH_MEDIUM;
     03: signal_double_block_searchlight_ADVANCED_APPROACH;
     02: signal_double_block_searchlight_APPROACH;
     00: signal_double_block_searchlight_STOP;
@@ -295,12 +317,18 @@ switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_searchlight, SIGNAL_ASPECT()){
     00: signal_double_onewaypath_searchlight_STOP;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_searchlight, SIGNAL_TYPE() << 8 | param_use_double_headed_block){
+switch(FEAT_SIGNALS, SELF, sw_searchlight, param_uniform_signal_graphics << 16 | SIGNAL_TYPE() << 8 | param_use_double_headed_block){
     0x000: sw_single_block_searchlight;
     0x001: sw_double_block_searchlight;
     0x400..0x401: sw_double_path_searchlight;
     0x500..0x501: sw_double_onewaypath_searchlight;
     0x700..0x701: signal_noentry;
+    0x10000..0x10501: sw_double_block_searchlight;
+    0x10700..0x10701: signal_noentry;
+    0x20000..0x20501: sw_double_path_searchlight;
+    0x20700..0x20701: signal_noentry;
+    0x30000..0x30501: sw_double_onewaypath_searchlight;
+    0x30700..0x30701: signal_noentry;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_single_block_colorlight, SIGNAL_ASPECT()){
@@ -315,7 +343,7 @@ switch(FEAT_SIGNALS, SELF, sw_single_block_colorlight, SIGNAL_ASPECT()){
 switch(FEAT_SIGNALS, SELF, sw_double_block_colorlight, SIGNAL_ASPECT()){
     01: signal_double_block_colorlight_CLEAR;
     05: signal_double_block_colorlight_ADVANCED_APPROACH_LIMITED;
-    04: signal_double_block_colorlight_APPROACH_LIMITED;
+    04: signal_double_block_colorlight_APPROACH_MEDIUM;
     03: signal_double_block_colorlight_ADVANCED_APPROACH;
     02: signal_double_block_colorlight_APPROACH;
     00: signal_double_block_colorlight_STOP;
@@ -339,12 +367,18 @@ switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_colorlight, SIGNAL_ASPECT()){
     00: signal_double_onewaypath_colorlight_STOP;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_colorlight, SIGNAL_TYPE() << 8 | param_use_double_headed_block){
+switch(FEAT_SIGNALS, SELF, sw_colorlight, param_uniform_signal_graphics << 16 | SIGNAL_TYPE() << 8 | param_use_double_headed_block){
     0x000: sw_single_block_colorlight;
     0x001: sw_double_block_colorlight;
     0x400..0x401: sw_double_path_colorlight;
     0x500..0x501: sw_double_onewaypath_colorlight;
     0x700..0x701: signal_noentry;
+    0x10000..0x10501: sw_double_block_colorlight;
+    0x10700..0x10701: signal_noentry;
+    0x20000..0x20501: sw_double_path_colorlight;
+    0x20700..0x20701: signal_noentry;
+    0x30000..0x30501: sw_double_onewaypath_colorlight;
+    0x30700..0x30701: signal_noentry;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_single_block_boposition, SIGNAL_ASPECT()){
@@ -359,7 +393,7 @@ switch(FEAT_SIGNALS, SELF, sw_single_block_boposition, SIGNAL_ASPECT()){
 switch(FEAT_SIGNALS, SELF, sw_double_block_boposition, SIGNAL_ASPECT()){
     01: signal_double_block_boposition_CLEAR;
     05: signal_double_block_boposition_ADVANCED_APPROACH_LIMITED;
-    04: signal_double_block_boposition_APPROACH_LIMITED;
+    04: signal_double_block_boposition_APPROACH_MEDIUM;
     03: signal_double_block_boposition_ADVANCED_APPROACH;
     02: signal_double_block_boposition_APPROACH;
     00: signal_double_block_boposition_STOP;
@@ -383,12 +417,18 @@ switch(FEAT_SIGNALS, SELF, sw_double_onewaypath_boposition, SIGNAL_ASPECT()){
     00: signal_double_onewaypath_boposition_STOP;
 }
 
-switch(FEAT_SIGNALS, SELF, sw_boposition, SIGNAL_TYPE() << 8 | param_use_double_headed_block){
+switch(FEAT_SIGNALS, SELF, sw_boposition, param_uniform_signal_graphics << 16 | SIGNAL_TYPE() << 8 | param_use_double_headed_block){
     0x000: sw_single_block_boposition;
     0x001: sw_double_block_boposition;
     0x400..0x401: sw_double_path_boposition;
     0x500..0x501: sw_double_onewaypath_boposition;
     0x700..0x701: signal_noentry;
+    0x10000..0x10501: sw_double_block_boposition;
+    0x10700..0x10701: signal_noentry;
+    0x20000..0x20501: sw_double_path_boposition;
+    0x20700..0x20701: signal_noentry;
+    0x30000..0x30501: sw_double_onewaypath_boposition;
+    0x30700..0x30701: signal_noentry;
 }
 
 switch(FEAT_SIGNALS, SELF, sw_signal_styles, signal_style) {

@@ -25,33 +25,33 @@ def main():
 signalKinds = OrderedDict({
     "block": OrderedDict({
         "single": {
-            "CLR": [(0, 2)],
-            "APR": [(0, 1)],
-            "STP": [(0, 0)],
+            "CLEAR": [(0, 2)],
+            "APPROACH": [(0, 1)],
+            "STOP": [(0, 0)],
         },
         "double": {
-            "CLR": [(1, 2+DOUBLE_BLOCK_OFFSET), (1, 0+DOUBLE_BLOCK_OFFSET)],
-            "AAL": [(1, 1+DOUBLE_BLOCK_OFFSET)],
-            "APM": [(2, 1+DOUBLE_BLOCK_OFFSET)],
-            "AAP": [(2, 2+DOUBLE_BLOCK_OFFSET)],
-            "APR": [(2, 0+DOUBLE_BLOCK_OFFSET)],
-            "STP": [(3, 0+DOUBLE_BLOCK_OFFSET)],
+            "CLEAR": [(1, 2+DOUBLE_BLOCK_OFFSET), (1, 0+DOUBLE_BLOCK_OFFSET)],
+            "ADVANCED_APPROACH_LIMITED": [(1, 1+DOUBLE_BLOCK_OFFSET)],
+            "APPROACH_MEDIUM": [(2, 1+DOUBLE_BLOCK_OFFSET)],
+            "ADVANCED_APPROACH": [(2, 2+DOUBLE_BLOCK_OFFSET)],
+            "APPROACH": [(2, 0+DOUBLE_BLOCK_OFFSET)],
+            "STOP": [(3, 0+DOUBLE_BLOCK_OFFSET)],
         },
     }),
     "path": OrderedDict({
         "double": {
-            "CLR": [(1, 2), (1, 0)],
-            "MCL": [(3, 2)],
-            "APR": [(2, 0)],
-            "STP": [(3, 0)],
+            "CLEAR": [(1, 2), (1, 0)],
+            "MEDIUM_CLEAR": [(3, 2)],
+            "APPROACH": [(2, 0)],
+            "STOP": [(3, 0)],
         }
     }),
     "onewaypath": OrderedDict({
         "double": {
-            "CLR": [(1, 2+ONEWAY_PATH_OFFSET), (1, 0+ONEWAY_PATH_OFFSET)],
-            "MCL": [(3, 2+ONEWAY_PATH_OFFSET)],
-            "APR": [(2, 0+ONEWAY_PATH_OFFSET)],
-            "STP": [(3, 0+ONEWAY_PATH_OFFSET)],
+            "CLEAR": [(1, 2+ONEWAY_PATH_OFFSET), (1, 0+ONEWAY_PATH_OFFSET)],
+            "MEDIUM_CLEAR": [(3, 2+ONEWAY_PATH_OFFSET)],
+            "APPROACH": [(2, 0+ONEWAY_PATH_OFFSET)],
+            "STOP": [(3, 0+ONEWAY_PATH_OFFSET)],
         }
     }),
 })
