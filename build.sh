@@ -32,7 +32,7 @@ compile() {
 	echo "Compiling GRF..."
 	mkdir -v -p out
 	sprites
-	./nml/nmlc --custom-tags=lang/custom_tags.txt --palette=DOS --nfo=out/cass2.nfo --grf=out/$GRF_FILENAME out/cass2.nml
+	./nml/nmlc -s --custom-tags=lang/custom_tags.txt --grf=out/$GRF_FILENAME out/cass2.nml
 	echo "Compiling GRF complete."
 	LINE
 }

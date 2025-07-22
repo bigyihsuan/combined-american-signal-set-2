@@ -4,8 +4,8 @@ from collections import OrderedDict
 
 ONEWAY_PATH_OFFSET = 24
 DOUBLE_BLOCK_OFFSET = 48
-TEMPLATE_SINGLE = """spriteset(signal_{head}_{signalType}_{aspect}, "src/img/{name}/{name}.png"){{{southwestOffset}}}"""
-TEMPLATE = """spriteset(signal_{head}_{signalVariant}_{signalType}_{aspect}, "src/img/{name}/{name}.png"){{{southwestOffset}}}"""
+TEMPLATE_SINGLE = """spriteset(signal_{head}_{signalType}_{aspect}, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "src/img/{name}/{name}.png"){{{southwestOffset}}}"""
+TEMPLATE_DOUBLE = """spriteset(signal_{head}_{signalVariant}_{signalType}_{aspect}, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "src/img/{name}/{name}.png"){{{southwestOffset}}}"""
 
 
 class V(Enum):
@@ -36,12 +36,8 @@ class SA(Enum):
 
 class DA(Enum):
     Clear = "CLEAR"
-    AdvanceApproachMedium = "ADVANCE_APPROACH_MEDIUM"
     ApproachMedium = "APPROACH_MEDIUM"
-    AdvanceApproach = "ADVANCE_APPROACH"
-    MediumClear = "MEDIUM_CLEAR"
     Approach = "APPROACH"
-    Restricting = "RESTRICTING"
     Stop = "STOP"
 
     def __str__(self) -> str:
@@ -49,20 +45,16 @@ class DA(Enum):
 
 
 single_head_aspects = OrderedDict({
-    SA.Clear: [(0, 2)],
-    SA.Approach: [(0, 1)],
     SA.Stop: [(0, 0)],
+    SA.Approach: [(0, 1)],
+    SA.Clear: [(0, 2)],
 })
 
 double_head_aspects = OrderedDict({
-    DA.Clear: [(1, 2), (1, 0)],
-    DA.AdvanceApproachMedium: [(1, 1)],
-    DA.ApproachMedium: [(2, 2)],
-    DA.AdvanceApproach: [(2, 1)],
-    DA.MediumClear: [(3, 2)],
-    DA.Approach: [(2, 0)],
-    DA.Restricting: [(3, 1)],
     DA.Stop: [(3, 0)],
+    DA.Approach: [(2, 0)],
+    DA.ApproachMedium: [(2, 2)],
+    DA.Clear: [(1, 0)],
 })
 
 aspects = OrderedDict({
@@ -114,7 +106,7 @@ def main():
                             )
                             print(formatted)
                     else:
-                        formatted = TEMPLATE.format(
+                        formatted = TEMPLATE_DOUBLE.format(
                             head=head,
                             signalVariant=variant,
                             signalType=signal_type,

@@ -32,9 +32,6 @@ STR_PARAM_VALUE_SEARCHLIGHT :Searchlight
 STR_PARAM_VALUE_COLORLIGHT  :Color light
 STR_PARAM_VALUE_BOPOSITION  :B&O position
 
-STR_PARAM_UNIFORM_SIGNALS_NAME :Use uniform graphics
-STR_PARAM_UNIFORM_SIGNALS_DESC :Force all non-one-way signals to uniformly use the selected signal graphics.{} - Block: single-headed. If double-headed, with a milepost plate.{} - Two-Way Path: double-headed, no plates.{} - One-Way Path: double-headed, yellow plates.{}{}{YELLOW}Note: This will cause all signals to be completely indistinct with each other.{WHITE}
-
 STR_PARAM_UNIFORM_SIGNALS_VALUE_OFF :Off
 STR_PARAM_UNIFORM_SIGNALS_VALUE_BLOCK :Block
 STR_PARAM_UNIFORM_SIGNALS_VALUE_TWOWAY_PATH :Two-Way Path

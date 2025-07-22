@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.4.0
+
+- Completely overhaul signal aspects to follow NORAC rules.
+- All signals use the same aspects.
+- Update graphics to 32bpp.
+
 ## v1.3.3
 
 - Remove incompatibility with North American Track Set and North American Track Set 2. Note that for both GRFs, the "custom signals" parameter should be set to off.
