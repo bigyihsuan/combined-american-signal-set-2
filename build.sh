@@ -5,7 +5,8 @@ set -e
 NGRF_DIRS=(/mnt/c/Users/bigyi/Documents/OpenTTD/newgrf /mnt/c/Users/bigyi/OneDrive/Documents/OpenTTD/newgrf)
 USAGE="usage: ./build.sh (default | install | bundle | sprites | compile | clean)"
 BAD_ARGS=85
-GRF_PATH=./dist/cass2.grf
+GRF_FILENAME=cass2.grf
+GRF_PATH=./dist/$GRF_FILENAME
 
 LINE() {
 	echo "--------"
@@ -31,7 +32,7 @@ compile() {
 	echo "Compiling GRF..."
 	mkdir -v -p out
 	sprites
-	./nml/nmlc --custom-tags=lang/custom_tags.txt --palette=DOS --nfo=out/cass2.nfo --grf=out/cass2.grf out/cass2.nml
+	./nml/nmlc --custom-tags=lang/custom_tags.txt --palette=DOS --nfo=out/cass2.nfo --grf=out/$GRF_FILENAME out/cass2.nml
 	echo "Compiling GRF complete."
 	LINE
 }
@@ -41,7 +42,7 @@ bundle() {
 	rm -v cass2.tar
 	rm -v -r dist
 	mkdir -v -p dist
-	cp -v out/cass2.grf dist
+	cp -v out/$GRF_FILENAME dist
 	cp -v README.md dist/readme.txt
 	cp -v LICENSE dist/license.txt
 	cp -v changelog.md dist/changelog.txt
@@ -66,7 +67,7 @@ install() {
 clean() {
     echo "Cleaning installation dir..."
 	for dir in "${NGRF_DIRS[@]}"; do
-		[ -e "$dir/cass2.grf" ] && rm -v "$dir/cass2.grf"
+		[ -e "$dir/$GRF_FILENAME" ] && rm -v "$dir/$GRF_FILENAME"
 	done
 	echo "Cleaning complete."
 	LINE
