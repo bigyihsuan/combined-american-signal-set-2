@@ -3,15 +3,22 @@ grf {
     name:                   string(STR_GRF_NAME);
     desc:                   string(STR_GRF_DESCRIPTION);
     url:                    string(STR_GRF_URL);
-    version:                7;
+    version:                8;
     min_compatible_version: 0;
 
     param {
         param_replace_default_graphics {
-            type: bool;
+            type: int;
             name: string(STR_PARAM_REPLACE_DEFAULT_NAME);
             desc: string(STR_PARAM_REPLACE_DEFAULT_DESC);
             def_value: 0;
+            min_value: 0;
+            max_value: 2;
+            names: {
+                0: string(STR_PARAM_NO_REPLACEMENT);
+                1: string(STR_PARAM_REPLACE_DEFAULT_ONLY);
+                2: string(STR_PARAM_REPLACE_DEFAULT_WITH_SELECTOR);
+            };
         }
     }
     param {
@@ -258,34 +265,34 @@ item (FEAT_SIGNALS, custom_signals, 0) {
     }
 }
 
-switch (FEAT_SIGNALS, SELF, replaced_signals_semaphore, param_signal_gui_row_1) {
+switch (FEAT_SIGNALS, SELF, sw_replaced_signals_semaphore, param_signal_gui_row_1) {
     0: sw_semaphore;
     1: sw_searchlight;
     2: sw_colorlight;
     3: sw_boposition;
 }
-switch (FEAT_SIGNALS, SELF, replaced_signals_electric, param_signal_gui_row_2) {
+switch (FEAT_SIGNALS, SELF, sw_replaced_signals_electric, param_signal_gui_row_2) {
     0: sw_semaphore;
     1: sw_searchlight;
     2: sw_colorlight;
     3: sw_boposition;
 }
-switch (FEAT_SIGNALS, SELF, replaced_signals, SIGNAL_VARIANT()) {
-    0: replaced_signals_electric;
-    1: replaced_signals_semaphore;
+switch (FEAT_SIGNALS, SELF, sw_replaced_signals, SIGNAL_VARIANT()) {
+    0: sw_replaced_signals_electric;
+    1: sw_replaced_signals_semaphore;
+}
+switch (FEAT_SIGNALS, SELF, sw_replaced_with_signal_styles, signal_style << 4 | SIGNAL_VARIANT()) {
+    0: sw_replaced_signals_electric;
+    1: sw_replaced_signals_semaphore;
+    0x10..0x11: sw_semaphore;
+    0x20..0x21: sw_searchlight;
+    0x30..0x31: sw_colorlight;
+    0x40..0x41: sw_boposition;
 }
 
 
-if (param_replace_default_graphics) {
-    item (FEAT_SIGNALS, custom_signals, 0) {
-        property {
-            enable_no_entry_signals: 1;
-        }
-        graphics {
-            replaced_signals;
-        }
-    }
-} else {
+if (param_replace_default_graphics == 0) {
+    // do not replace graphics, add styles only
     item (FEAT_SIGNALS, custom_signals, 0) {
         property {
             define_style:       1; // semaphore
@@ -310,6 +317,44 @@ if (param_replace_default_graphics) {
         }
         graphics {
             sw_signal_styles;
+        }
+    }
+} else if (param_replace_default_graphics == 1) {
+    // replace default, no selector
+    item (FEAT_SIGNALS, custom_signals, 0) {
+        property {
+            enable_no_entry_signals: 1;
+        }
+        graphics {
+            sw_replaced_signals;
+        }
+    }
+} else {
+    // replace default and add styles
+    item (FEAT_SIGNALS, custom_signals, 0) {
+        property {
+            define_style:       1; // semaphore
+            style_name:         string(STR_SIG_SEMAPHORE);
+            enable_no_entry_signals: 1;
+            style_semaphore_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY, SIGNAL_TYPE_NO_ENTRY);
+
+            define_style:       2; // searchlight
+            style_name:         string(STR_SIG_SEARCHLIGHT);
+            enable_no_entry_signals: 1;
+            style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY, SIGNAL_TYPE_NO_ENTRY);
+            
+            define_style:       3; // colorlight
+            style_name:         string(STR_SIG_COLORLIGHT);
+            enable_no_entry_signals: 1;
+            style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY, SIGNAL_TYPE_NO_ENTRY);
+            
+            define_style:       4; // b&o color position
+            style_name:         string(STR_SIG_BOPOSITION);
+            enable_no_entry_signals: 1;
+            style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY, SIGNAL_TYPE_NO_ENTRY);
+        }
+        graphics {
+            sw_replaced_with_signal_styles;
         }
     }
 }

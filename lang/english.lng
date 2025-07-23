@@ -15,8 +15,8 @@ STR_SIG_SEARCHLIGHT :Searchlight
 STR_SIG_COLORLIGHT  :Color-light
 STR_SIG_BOPOSITION  :B&O Color position
 
-STR_PARAM_REPLACE_DEFAULT_NAME :Replace default graphics
-STR_PARAM_REPLACE_DEFAULT_DESC :Replace the default signal graphics with CASS2 graphics. If off, the JGRPP signal style selector will be used.
+STR_PARAM_REPLACE_DEFAULT_NAME :Graphics replacement behavior
+STR_PARAM_REPLACE_DEFAULT_DESC :The behavior to use when replacing the default signal graphics.{}{}Do not replace: Use default graphics, with style selector.{}{}Replace default only: Use the selections in the "Signal style for signal GUI" parameters, without style selector.{}{}Replace default, with all styles: Use the selections in the "Signal style for signal GUI" parameters, with style selector.
 
 STR_PARAM_USE_DOUBLE_BLOCK_NAME :Use double-headed block signals
 STR_PARAM_USE_DOUBLE_BLOCK_DESC :Use double-headed block signals instead of single-headed block signals. Block signals in this mode will gain a white number plate.
@@ -36,3 +36,7 @@ STR_PARAM_UNIFORM_SIGNALS_VALUE_OFF :Off
 STR_PARAM_UNIFORM_SIGNALS_VALUE_BLOCK :Block
 STR_PARAM_UNIFORM_SIGNALS_VALUE_TWOWAY_PATH :Two-Way Path
 STR_PARAM_UNIFORM_SIGNALS_VALUE_ONEWAY_PATH :One-Way Path
+
+STR_PARAM_NO_REPLACEMENT :Do not replace
+STR_PARAM_REPLACE_DEFAULT_ONLY :Replace default only
+STR_PARAM_REPLACE_DEFAULT_WITH_SELECTOR :Replace default, with all styles
