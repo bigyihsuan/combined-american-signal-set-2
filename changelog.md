@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.5.0
+
+- Change graphics replacement parameter to allow for replacing graphics with or without the JGRPP signal style selector.
+
 ## v1.4.0
 
 - Completely overhaul signal aspects to follow NORAC rules.
