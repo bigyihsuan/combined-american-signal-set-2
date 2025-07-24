@@ -2,8 +2,12 @@
 
 A JGRPP-only, unofficial successor to the "Combined Americal Signal Set" by Pikka et al, with the goal to be updated to use NML, and support JGRPP's multi-aspect signals.
 
-![CASS2 All signals](<img/cass2 all signals.png>)
-![CASS2 Double-headed block signal aspects](<img/cass2 double block.png>)
+|||
+|-|-|
+|![sema](<img/sema.png>)|![searchlight](<img/searchlight.png>)|
+|![colorlight](<img/colorlight.png>)|![bo](<img/bo.png>)|
+
+![doubleblock](<img/doubleblock.png>)
 
 ## Features
 
