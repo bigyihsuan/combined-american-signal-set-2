@@ -21,16 +21,13 @@ A JGRPP-only, unofficial successor to the "Combined Americal Signal Set" by Pikk
   - Searchlight
   - Color lights
   - B&O Color-position
-- Other features
-  - Ability to replace default graphics
-  - Ability to use double-headed block signals instead
-  - Ability to set signal styles individually per signal GUI row (when replacing default graphics only)
+- Multi-aspect signals, based on NORAC rules
 
 ## Parameters
 
-- Replace default graphics: Replace the default OpenTTD graphics.
-- Use double-headed block signals: Use double-headed signals instead of single-leaded block signals.
-- Signal style for signal GUI top/bottom row: Requires the "replace default graphics" setting to be on. Sets what signal style will be used for the respective rows in the signal GUI.
+- Graphics replacement behavior: do not replace default, replace default, replace default and with styles.
+- Use double-headed block signal
+- Signal style for signal GUI: used when default graphics are replaced.
 
 ## TODO
 
