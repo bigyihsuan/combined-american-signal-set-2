@@ -3,7 +3,7 @@
 set -e
 
 NGRF_DIRS=(/mnt/c/Users/bigyi/Documents/OpenTTD/newgrf /mnt/c/Users/bigyi/OneDrive/Documents/OpenTTD/newgrf)
-USAGE="usage: ./build.sh (default | install | bundle | sprites | compile | clean)"
+USAGE="usage: ./build.sh (default | install | bundle | sprites | switches | compile | clean)"
 BAD_ARGS=85
 GRF_FILENAME=cass2.grf
 GRF_PATH=./dist/$GRF_FILENAME
@@ -21,18 +21,32 @@ default() {
 
 sprites() {
 	echo "Generating sprites..."
+	cp src/cass2_template.nml out/cass2-tmp.nml
 	python3.13 src/generateSpritesets.py | sed '/^\/\/!SPRITES!\/\//{
 		r /dev/stdin
 		d
-		}' src/cass2_template.nml > out/cass2.nml
+		}' out/cass2-tmp.nml > out/cass2.nml
+	rm out/cass2-tmp.nml
 	echo "Sprites generated."
+}
+
+switches() {
+	echo "Generating switches..."
+	cp out/cass2.nml out/cass2-tmp.nml
+	python3.13 src/generateSwitches.py | sed '/^\/\/!SWITCHES!\/\//{
+		r /dev/stdin
+		d
+		}' out/cass2-tmp.nml > out/cass2.nml
+	rm out/cass2-tmp.nml
+	echo "Switches generated."
 }
 
 compile() {
 	echo "Compiling GRF..."
 	mkdir -v -p out
 	sprites
-	./nml/nmlc -s --custom-tags=lang/custom_tags.txt --grf=out/$GRF_FILENAME out/cass2.nml
+	switches
+	./nml/nmlc --custom-tags=lang/custom_tags.txt --grf=out/$GRF_FILENAME out/cass2.nml
 	echo "Compiling GRF complete."
 	LINE
 }
@@ -80,6 +94,8 @@ fi
 
 if [[ "$1" = "sprites" ]]; then
 	sprites
+elif [[ "$1" = "switches" ]]; then
+	switches
 elif [[ "$1" = "default" ]]; then
 	default
 elif [[ "$1" = "install" ]]; then
