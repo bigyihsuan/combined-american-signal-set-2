@@ -15,6 +15,9 @@ class V(Enum):
 
     def __str__(self) -> str:
         return self.value
+    
+    def all() -> list[Self]:
+        return list(V._member_map_.values())
 
 
 class Head(Enum):
@@ -80,7 +83,7 @@ signal_names: dict[str, str] = {
 def main():
     for signal_type in signal_types:
         name = signal_names[signal_type]
-        for variant in [V.Block, V.Path, V.OneWayPath]:
+        for variant in V.all():
             for head, head_aspects in aspects.items():
                 for aspect, offsets in head_aspects.items():
                     aspect_offsets = [
@@ -119,5 +122,7 @@ def main():
                 if head == Head.Single and variant != V.Block:
                     continue
                 print()
+    print("""spriteset(signal_noentry, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "src/img/oneway.png"){consecutive(0,0)}""")
+    print()
 
 main()

@@ -102,8 +102,6 @@ template consecutive(signalRow, aspectColumn) {
 
 //!SPRITES!//
 
-spriteset(signal_noentry, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "src/img/oneway/oneway.png"){consecutive(0,0)}
-
 switch(FEAT_SIGNALS, SELF, SIGNAL_ASPECT, getbits(extra_callback_info2, 0, 8)){return;}
 switch(FEAT_SIGNALS, SELF, SIGNAL_VARIANT, getbits(extra_callback_info2, 8, 8)){return;}
 switch(FEAT_SIGNALS, SELF, SIGNAL_TYPE, getbits(extra_callback_info2, 16, 8)){return;}

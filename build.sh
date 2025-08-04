@@ -21,7 +21,7 @@ default() {
 
 sprites() {
 	echo "Generating sprites..."
-	python3 src/generateSpritesets.py | sed '/^\/\/!SPRITES!\/\//{
+	python3.13 src/generateSpritesets.py | sed '/^\/\/!SPRITES!\/\//{
 		r /dev/stdin
 		d
 		}' src/cass2_template.nml > out/cass2.nml
