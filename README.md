@@ -2,9 +2,8 @@
 
 A JGRPP-only, unofficial successor to the "Combined Americal Signal Set" by Pikka et al, with the goal to be updated to use NML, and support JGRPP's multi-aspect signals.
 
-|||
-|-|-|
 |![sema](<img/sema.png>)|![searchlight](<img/searchlight.png>)|
+|-|-|
 |![colorlight](<img/colorlight.png>)|![bo](<img/bo.png>)|
 
 ![doubleblock](<img/doubleblock.png>)
@@ -21,6 +20,7 @@ A JGRPP-only, unofficial successor to the "Combined Americal Signal Set" by Pikk
   - Searchlight
   - Color lights
   - B&O Color-position
+  - Tri-light
 - Multi-aspect signals, based on NORAC rules
 
 ## Parameters
