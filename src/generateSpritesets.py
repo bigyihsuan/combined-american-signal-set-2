@@ -24,7 +24,7 @@ def main():
         else:
             continue
         print()
-    print("""spriteset(signal_noentry, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "src/img/oneway.png"){consecutive(0,0)}""")
+    print("""spriteset (signal_noentry, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "src/img/oneway.png") {consecutive(0,0)}""")
     print()
 
 main()

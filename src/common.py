@@ -4,7 +4,10 @@ from typing import Self
 ONEWAY_PATH_OFFSET = 24
 DOUBLE_BLOCK_OFFSET = 48
 SPRITE = """signal_{style}_{variant}_{head}_{aspect}"""
-SPRITESET = """spriteset({sprite}, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "src/img/{name}.png"){{{southwest}}}"""
+SPRITESET = """spriteset ({sprite}, {zoom_level}, BIT_DEPTH_32BPP, "src/img/{name}.png") {{{southwest}}}"""
+
+ZOOM_LEVEL_NORMAL = "ZOOM_LEVEL_NORMAL"
+ZOOM_LEVEL_IN_2X = "ZOOM_LEVEL_IN_2X"
 
 class Aspect(Enum):
     Red = "R"
@@ -59,13 +62,14 @@ class Style(Enum):
     Search = "searchlight"
     Color = "colorlight"
     Bo = "boposition"
+    Tri = "trilight"
 
     def __str__(self) -> str:
         return self.value
     
     @staticmethod
     def all() -> list["Style"]:
-        return [Style.Semaphore, Style.Search, Style.Color, Style.Bo]
+        return [Style.Semaphore, Style.Search, Style.Color, Style.Bo, Style.Tri]
     
     def to_name(self) -> str:
         match self:
@@ -77,8 +81,13 @@ class Style(Enum):
                 return "color"
             case Style.Bo:
                 return "bo"
+            case Style.Tri:
+                return "tri"
             case _:
                 raise Exception(f"invalid style {self}")
+    
+    def double(self) -> bool:
+        return self == Style.Tri
             
 
 def sprite(*, style: Style, head: Head, aspect: str, variant: Variant) -> str:
@@ -92,7 +101,8 @@ def sprite(*, style: Style, head: Head, aspect: str, variant: Variant) -> str:
 def spriteset(*, style: Style, head: Head, aspect: str, variant: Variant, name: str, southwest: tuple[int, int]):
     formatted = SPRITESET.format(
         sprite=sprite(style=style, head=head, aspect=aspect, variant=variant),
+        zoom_level=ZOOM_LEVEL_NORMAL if not style.double() else ZOOM_LEVEL_IN_2X,
         name=name,
-        southwest=f"aspect{southwest}",
+        southwest=f"aspect{southwest}" if not style.double() else f"aspect2{southwest}",
     )
     return formatted

@@ -12,8 +12,9 @@ STR_SIG_DOUBLE      :Double-head
 
 STR_SIG_SEMAPHORE   :Semaphore
 STR_SIG_SEARCHLIGHT :Searchlight
-STR_SIG_COLORLIGHT  :Color-light
+STR_SIG_COLORLIGHT  :Color light
 STR_SIG_BOPOSITION  :B&O Color position
+STR_SIG_TRILIGHT    :Tri-light
 
 STR_PARAM_REPLACE_DEFAULT_NAME :Graphics replacement behavior
 STR_PARAM_REPLACE_DEFAULT_DESC :The behavior to use when replacing the default signal graphics.{}{}Do not replace: Use default graphics, with style selector.{}{}Replace default only: Use the selections in the "Signal style for signal GUI" parameters, without style selector.{}{}Replace default, with all styles: Use the selections in the "Signal style for signal GUI" parameters, with style selector.
@@ -31,6 +32,7 @@ STR_PARAM_VALUE_SEMAPHORE   :Semaphore
 STR_PARAM_VALUE_SEARCHLIGHT :Searchlight
 STR_PARAM_VALUE_COLORLIGHT  :Color light
 STR_PARAM_VALUE_BOPOSITION  :B&O position
+STR_PARAM_VALUE_TRILIGHT    :Tri-light
 
 STR_PARAM_UNIFORM_SIGNALS_VALUE_OFF :Off
 STR_PARAM_UNIFORM_SIGNALS_VALUE_BLOCK :Block

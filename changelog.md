@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.6.0
+
+- Change: Color light signals now have 3 lamps, instead of 2.
+- Add: Tri-light signals. These are signals whose lamps are arranged in a triangle.
+
 ## v1.5.0
 
 - Change graphics replacement parameter to allow for replacing graphics with or without the JGRPP signal style selector.

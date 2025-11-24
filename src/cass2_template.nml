@@ -78,6 +78,10 @@ Different orientations of the same aspect are located on the same row, 17*3 = 51
 template cell(x, y, n, k) { [17*x+17*k*n, 33*y, 16, 32, -8, -32] }
 template aspect_cell(x, y, n) { cell(x, y, n, 3) }
 
+// cell2 and aspect_cell2 are variants for 2x-sized sprites
+template cell2(x, y, n, k) { [34*x+34*k*n, 66*y, 32, 64, -16, -64] }
+template aspect_cell2(x, y, n) { cell2(x, y, n, 3) }
+
 // x and y are the 0-indexed col/row number of the signal
 template aspect(signalRow, aspectColumn) {
     aspect_cell(aspectColumn, signalRow, 0)
@@ -88,6 +92,16 @@ template aspect(signalRow, aspectColumn) {
     aspect_cell(aspectColumn, signalRow, 5)
     aspect_cell(aspectColumn, signalRow, 6)
     aspect_cell(aspectColumn, signalRow, 7)
+}
+template aspect2(signalRow, aspectColumn) {
+    aspect_cell2(aspectColumn, signalRow, 0)
+    aspect_cell2(aspectColumn, signalRow, 1)
+    aspect_cell2(aspectColumn, signalRow, 2)
+    aspect_cell2(aspectColumn, signalRow, 3)
+    aspect_cell2(aspectColumn, signalRow, 4)
+    aspect_cell2(aspectColumn, signalRow, 5)
+    aspect_cell2(aspectColumn, signalRow, 6)
+    aspect_cell2(aspectColumn, signalRow, 7)
 }
 template consecutive(signalRow, aspectColumn) {
     cell(aspectColumn, signalRow, 0, 1)
@@ -102,17 +116,18 @@ template consecutive(signalRow, aspectColumn) {
 
 //!SPRITES!//
 
-switch(FEAT_SIGNALS, SELF, SIGNAL_ASPECT, getbits(extra_callback_info2, 0, 8)){return;}
-switch(FEAT_SIGNALS, SELF, SIGNAL_VARIANT, getbits(extra_callback_info2, 8, 8)){return;}
-switch(FEAT_SIGNALS, SELF, SIGNAL_TYPE, getbits(extra_callback_info2, 16, 8)){return;}
+switch (FEAT_SIGNALS, SELF, SIGNAL_ASPECT, getbits(extra_callback_info2, 0, 8)) {return;}
+switch (FEAT_SIGNALS, SELF, SIGNAL_VARIANT, getbits(extra_callback_info2, 8, 8)) {return;}
+switch (FEAT_SIGNALS, SELF, SIGNAL_TYPE, getbits(extra_callback_info2, 16, 8)) {return;}
 
 //!SWITCHES!//
 
-switch(FEAT_SIGNALS, SELF, sw_signal_styles, signal_style) {
+switch (FEAT_SIGNALS, SELF, sw_signal_styles, signal_style) {
     1: sw_semaphore;
     2: sw_searchlight;
     3: sw_colorlight;
     4: sw_boposition;
+    5: sw_trilight;
 }
 
 item (FEAT_SIGNALS, custom_signals, 0) {
@@ -126,12 +141,14 @@ switch (FEAT_SIGNALS, SELF, sw_replaced_signals_semaphore, param_signal_gui_row_
     1: sw_searchlight;
     2: sw_colorlight;
     3: sw_boposition;
+    4: sw_trilight;
 }
 switch (FEAT_SIGNALS, SELF, sw_replaced_signals_electric, param_signal_gui_row_2) {
     0: sw_semaphore;
     1: sw_searchlight;
     2: sw_colorlight;
     3: sw_boposition;
+    4: sw_trilight;
 }
 switch (FEAT_SIGNALS, SELF, sw_replaced_signals, SIGNAL_VARIANT()) {
     0: sw_replaced_signals_electric;
@@ -144,6 +161,7 @@ switch (FEAT_SIGNALS, SELF, sw_replaced_with_signal_styles, signal_style << 4 | 
     0x20..0x21: sw_searchlight;
     0x30..0x31: sw_colorlight;
     0x40..0x41: sw_boposition;
+    0x50..0x51: sw_trilight;
 }
 
 
@@ -168,6 +186,11 @@ if (param_replace_default_graphics == 0) {
             
             define_style:       4; // b&o color position
             style_name:         string(STR_SIG_BOPOSITION);
+            enable_no_entry_signals: 1;
+            style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY, SIGNAL_TYPE_NO_ENTRY);
+
+            define_style:       5; // tri-light
+            style_name:         string(STR_SIG_TRILIGHT);
             enable_no_entry_signals: 1;
             style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY, SIGNAL_TYPE_NO_ENTRY);
         }
@@ -206,6 +229,11 @@ if (param_replace_default_graphics == 0) {
             
             define_style:       4; // b&o color position
             style_name:         string(STR_SIG_BOPOSITION);
+            enable_no_entry_signals: 1;
+            style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY, SIGNAL_TYPE_NO_ENTRY);
+
+            define_style:       5; // tri-light
+            style_name:         string(STR_SIG_TRILIGHT);
             enable_no_entry_signals: 1;
             style_electric_enabled: bitmask(SIGNAL_TYPE_NORMAL, SIGNAL_TYPE_PBS, SIGNAL_TYPE_PBS_ONEWAY, SIGNAL_TYPE_NO_ENTRY);
         }

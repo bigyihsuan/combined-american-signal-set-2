@@ -3,11 +3,11 @@ from common import *
 import itertools as it
 
 ASPECT_SWITCH_NAME = """sw_{style}_{variant}_{head}"""
-ASPECT_SWITCH = """switch(FEAT_SIGNALS, SELF, {name}, SIGNAL_ASPECT()){{\n{cases}\n}}"""
+ASPECT_SWITCH = """switch (FEAT_SIGNALS, SELF, {name}, SIGNAL_ASPECT()) {{\n{cases}\n}}"""
 ASPECT_CASE = """    {i}: {sprite};"""
 
 STYLE_SWITCH_NAME = """sw_{variant}"""
-STYLE_SWITCH = """switch(FEAT_SIGNALS, SELF, {name}, SIGNAL_TYPE() << 4 | param_use_double_headed_block) {{\n{cases}\n}}"""
+STYLE_SWITCH = """switch (FEAT_SIGNALS, SELF, {name}, SIGNAL_TYPE() << 4 | param_use_double_headed_block) {{\n{cases}\n}}"""
 STYLE_CASE = """    {vals}: {aspect};"""
 
 class NORAD:
