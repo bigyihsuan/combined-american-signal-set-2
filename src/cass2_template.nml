@@ -36,12 +36,13 @@ grf {
             desc: string(STR_PARAM_SIGNAL_ROW_1_DESC);
             def_value: 0;
             min_value: 0;
-            max_value: 3;
+            max_value: 4;
             names: {
                 0: string(STR_PARAM_VALUE_SEMAPHORE);
                 1: string(STR_PARAM_VALUE_SEARCHLIGHT);
                 2: string(STR_PARAM_VALUE_COLORLIGHT);
                 3: string(STR_PARAM_VALUE_BOPOSITION);
+                4: string(STR_PARAM_VALUE_TRILIGHT);
             };
         }
     }
@@ -52,12 +53,13 @@ grf {
             desc: string(STR_PARAM_SIGNAL_ROW_2_DESC);
             def_value: 1;
             min_value: 0;
-            max_value: 3;
+            max_value: 4;
             names: {
                 0: string(STR_PARAM_VALUE_SEMAPHORE);
                 1: string(STR_PARAM_VALUE_SEARCHLIGHT);
                 2: string(STR_PARAM_VALUE_COLORLIGHT);
                 3: string(STR_PARAM_VALUE_BOPOSITION);
+                4: string(STR_PARAM_VALUE_TRILIGHT);
             };
         }
     }

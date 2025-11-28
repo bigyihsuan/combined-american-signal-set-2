@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.6.1
+
+- Fix: parameters did not include tri-light signals as an option.
+
 ## 1.6.0
 
 - Change: Color light signals now have 3 lamps, instead of 2.
