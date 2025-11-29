@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.6.2
+
+- Fix: One-way path tri-light signal boards were 1 pixel too far down.
+
 ## 1.6.1
 
 - Fix: parameters did not include tri-light signals as an option.

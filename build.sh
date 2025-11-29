@@ -58,7 +58,7 @@ bundle() {
 	mkdir -v -p dist
 	cp -v out/$GRF_FILENAME dist
 	cp -v README.md dist/readme.txt
-	cp -v LICENSE dist/license.txt
+	# cp -v LICENSE dist/license.txt
 	cp -v changelog.md dist/changelog.txt
 	tar cvf cass2.tar dist
 	echo "GRF bundled."
